@@ -1,3 +1,17 @@
+# Custom ignore
+.DS_Store
+*.swp
+/static/
+/media/
+base.py
+production.py
+dev.py
+._*
+node_modules
+ua-wagtailenv
+umairabbasi_tags.py
+**/migrations/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -20,7 +34,6 @@ lib64/
 parts/
 sdist/
 var/
-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -43,7 +56,7 @@ htmlcov/
 .cache
 nosetests.xml
 coverage.xml
-*.cover
+*,cover
 .hypothesis/
 
 # Translations
@@ -67,7 +80,7 @@ docs/_build/
 # PyBuilder
 target/
 
-# Jupyter Notebook
+# IPython Notebook
 .ipynb_checkpoints
 
 # pyenv
@@ -76,26 +89,17 @@ target/
 # celery beat schedule file
 celerybeat-schedule
 
-# SageMath parsed files
-*.sage.py
-
 # dotenv
 .env
 
 # virtualenv
-.venv
 venv/
 ENV/
 
 # Spyder project settings
 .spyderproject
-.spyproject
 
 # Rope project settings
 .ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
+/grunt/.sass-cache
+/gunicorn.conf.py
