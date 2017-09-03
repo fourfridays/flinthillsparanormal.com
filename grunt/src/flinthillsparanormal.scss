@@ -2,7 +2,8 @@
 @import 'font-awesome-custom';
 
 
-$brand: rgba(183, 28, 28, 1);
+$brand: rgba(191, 191, 191, 1);
+$brand-secondary: rgba(100, 99, 97, 1);
 
 @font-face {
     font-family: 'Material Icons';
@@ -81,11 +82,11 @@ a {
 }
 
 .btn-primary {
-    background-color: $brand;
+    background-color: $brand-secondary;
     border-color: $brand;
     &:hover {
-        background-color: #424242;
-        border-color: #424242;
+        background-color: $brand;
+        border-color: $brand-secondary;
     }
 }
 
@@ -140,7 +141,7 @@ header {
             padding: 0rem 1.5rem;
         }
         &.bg-light{
-            background-color: #ececec;
+            background-color: $brand-secondary !important;
         }
         ul {
             &.navbar-nav {
@@ -216,7 +217,7 @@ article {
     width: 100%; /* for IE 6 */
     figcaption {
         max-width: 45%;
-        background-color: rgba($brand, 0.9);
+        background-color: rgba($brand, 0.4);
         position: absolute;
         top: 65%;
         left: 10%;  
@@ -286,7 +287,7 @@ footer {
         text-align: right;
         a {
             &:hover {
-                color: #bdbdbd;
+                color: $brand-secondary;
             }
         }
     }
