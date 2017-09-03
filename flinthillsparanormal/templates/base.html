@@ -1,4 +1,4 @@
-{% load static wagtailuserbar %}
+{% load static %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -8,21 +8,14 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>
-            {% block title %}
-                {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
-            {% endblock %}
-            {% block title_suffix %}
-                {% with self.get_site.site_name as site_name %}
-                    {% if site_name %}- {{ site_name }}{% endif %}
-                {% endwith %}
-            {% endblock %}
-        </title>
-        <meta name="description" content="" />
+        <title>{% block title %}{% if self.seo_title == 'Home' %}Flint Hills Paranormal{% else %}{{ self.seo_title }} | Flint Hills Paranormal{% endif %}{% endblock %}</title>
+        <meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/flinthillsparanormal.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/flinthillsparanormal.min.css' %}">
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
@@ -30,12 +23,14 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
+    
+        <main role="main">
+            {% block content %}{% endblock %}
+        </main>
 
-        {% block content %}{% endblock %}
 
         {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/flinthillsparanormal.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/flinthillsparanormal.min.js' %}"></script>
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
