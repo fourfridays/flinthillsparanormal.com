@@ -15,7 +15,7 @@
         <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
 
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/flinthillsparanormal.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/flinthillsparanormal.css' %}">
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
@@ -23,11 +23,31 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
+
+        <header role="banner">
+            {% block menu %}
+                {% get_site_root as site_root %}
+                {% top_menu parent=site_root calling_page=self %}
+            {% endblock %}
+        </header>
     
         <main role="main">
             {% block content %}{% endblock %}
         </main>
 
+        <footer class="my-4" role="contentinfo">
+            <div class="container py-2">
+                <div class="row footer-text">
+                    <div class="col-md-6">
+                        <p><span class="copyright">&copy;</span> Copyright {% now "Y" %} Flint Hills Paranormal</p>
+                        <p>A <a style="color: #a43f33;" target="_blank" href="https://fourfridays.com">fourfridays [BETA]</a> website.</p>
+                    </div>
+                    <div class="col-md-6 contact-info">
+                        <p><i class="material-icons md-18">smartphone</i><a href="tel:+16204817442">+(1) 620 481-7442</a> <i class="material-icons md-18">email</i><a href="mailto:flinthillsparanormal@gmail.com"> flinthillsparanormal@gmail.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/flinthillsparanormal.min.js' %}"></script>
