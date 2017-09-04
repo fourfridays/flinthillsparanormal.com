@@ -141,7 +141,8 @@ header {
             padding: 0rem 1.5rem;
         }
         &.bg-light{
-            background-color: #1E272B !important;
+            background-color: #191919 !important;
+            border-bottom: 1px solid $brand;
         }
         ul {
             &.navbar-nav {
@@ -217,7 +218,7 @@ article {
     width: 100%; /* for IE 6 */
     figcaption {
         max-width: 45%;
-        background-color: rgba($brand, 0.4);
+        background-color: rgba($brand, 0.5);
         position: absolute;
         top: 65%;
         left: 10%;  
@@ -340,7 +341,8 @@ form {
     FOOTER
    ========================================================================== */
 footer {
-    background-color: rgba(66, 66, 66, 1.0);
+    background-color: #191919;
+    border-top: 1px solid $brand;
     .col-md-6.contact-info {
         text-align: right;
         a {
