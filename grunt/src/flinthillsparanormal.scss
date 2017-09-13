@@ -139,10 +139,15 @@ header {
         z-index: 1;
         &.navbar {
             padding: 0rem 1.5rem;
+            .navbar-brand {
+                .logo-subscript {
+                    font-size: 0.6em;
+                    color: #000;
+                    font-style: italic;
+                }
+            }
         }
         &.bg-light{
-            background-color: #1D1D1D !important;
-            border-bottom: 1px solid $brand;
         }
         ul {
             &.navbar-nav {
