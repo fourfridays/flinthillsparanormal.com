@@ -2,7 +2,7 @@
 @import 'font-awesome-custom';
 
 
-$brand: rgba(191, 191, 191, 1);
+$brand: rgba(68, 68, 68, 1);
 $brand-secondary: rgba(100, 99, 97, 1);
 
 @font-face {
@@ -77,7 +77,7 @@ a {
         outline: none;
     }
     &:hover {
-        color: #424242;
+        color: $brand-secondary;
     }
 }
 
