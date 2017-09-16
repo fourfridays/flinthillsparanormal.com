@@ -1,0 +1,22 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="evidence-block">
+    <table class="table table-striped">
+        <tr>
+            <td>Date</td>
+            <td>Title</td>
+            <td>Sound</td>
+            <td class="text-center">Image</td>
+        </tr>
+        <tr>
+            <td>{% include_block value.date %}</td>
+            <td>{% include_block value.title %}</td>
+            <td>{% include_block value.sound %}</td>
+            <td class="text-center">
+                {% image value.image width-140 as theimage %}
+                <img class="img-fluid thumbnail" src="{{ theimage.url }}" width="{{ theimage.width }}" height="{{ theimage.height }}" alt="{{ theimage.alt }}" />
+                <p class="py-0 small">Touch/Click to Enlarge</p>
+            </td>
+        </tr>
+    </table> 
+</div>
