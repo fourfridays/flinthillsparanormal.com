@@ -3,7 +3,7 @@
 <div class="streamfield">
     {% for child in content %}
         {% if child.block_type == 'h1' %}
-            <h1 class="{{ child.value.alignment }}">{{ child.value.h1 }}</h1>
+            <h1 class="my-3 {{ child.value.alignment }}">{{ child.value.h1 }}</h1>
         {% elif child.block_type == 'h2' %}
             <h2 class="{{ child.value.alignment }}">{{ child.value.h2 }}</h2>
         {% elif child.block_type == 'h3' %}
