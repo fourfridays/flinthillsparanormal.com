@@ -2,10 +2,9 @@
 @import 'font-awesome-custom';
 @import '../node_modules/lightbox2/dist/css/lightbox';
 
+$primary: rgba(189, 60, 78, 1);
+$secondary: rgba(238, 238, 238, 1);
 
-$brand: rgba(68, 68, 68, 1);
-$brand-secondary: rgba(100, 99, 97, 1);
-$light-gray: #666666;
 
 @font-face {
     font-family: 'Material Icons';
@@ -30,7 +29,7 @@ $light-gray: #666666;
     word-wrap: normal;
     white-space: nowrap;
     direction: ltr;
-    color: $light-gray;
+    color: #BD3C4E;
 
     /* Support for all WebKit browsers. */
     -webkit-font-smoothing: antialiased;
@@ -56,40 +55,41 @@ $light-gray: #666666;
 .material-icons.md-120 { font-size: 120px; }
 
 .fa {
-    color: $brand;
+    color: #BD3C4E;
 }
 
 body {
     font-family: 'Roboto Condensed', sans-serif;
     background-color: #1D1D1D;
+    color: $secondary;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Trirong', serif;
-    color: #BD3C4E;
+    color: $primary;
 }
 h1 {
     text-transform: uppercase;
 }
 p {
     font-size: 0.95rem;
-    color: #eee;
 }
 a {
-    color: $brand;
+    color: $primary;
     &:active, &:focus {
         outline: none;
     }
     &:hover {
-        color: $brand-secondary;
+        color: $secondary;
     }
 }
 
 .btn-primary {
-    background-color: $brand-secondary;
-    border-color: $brand;
+    background-color: $primary;
+    border-color: $secondary;
     &:hover {
-        background-color: $brand;
-        border-color: $brand-secondary;
+        background-color: $secondary;
+        border-color: $primary;
+        color: #000;
     }
 }
 
@@ -145,7 +145,7 @@ header {
         }
         &.bg-light{
             background-color: #1D1D1D !important;
-            border-bottom: 1px solid #999;
+            border-bottom: 1px solid $primary;
         }
         ul {
             &.navbar-nav {
@@ -153,9 +153,9 @@ header {
                     font-size: 0.8em;
                     text-transform: uppercase;
                     font-weight: 600;
-                    color: #999;
+                    color: #BD3C4E;
                     &:hover, &.active {
-                        color: rgba($brand, 1);
+                        color: #eee;
                     }
                 }
             }
@@ -196,6 +196,13 @@ header {
 }
 
 
+/* Home */
+.flinthillsparanormal h3 {
+    padding: 8px;
+    background-color: $secondary;
+}
+
+
 /* Background Colors */
 article {
     &.white-smoke {
@@ -211,7 +218,7 @@ article {
         background-color: rgba(183, 28, 28, 0.8);
     }
     &.full-width {
-        padding: 50px 0;
+        padding: 20px 0;
     }
 }
 
@@ -222,7 +229,7 @@ article {
     width: 100%; /* for IE 6 */
     figcaption {
         max-width: 45%;
-        background-color: rgba($brand, 0.6);
+        background-color: rgba($primary, 0.6);
         position: absolute;
         top: 65%;
         left: 10%;  
@@ -252,9 +259,15 @@ article {
 
 
 /* News */
-article.news-index {
-    padding: 12px;
-    background-color: #eee;
+article.news-index{
+    h2 {
+        padding: 8px;
+        background-color: $secondary;
+        a:hover {
+            color: #000;
+            text-decoration: none;
+        }
+    }
 }
 
 /* Heart Rate */
@@ -326,7 +339,7 @@ form {
         textarea {
             @extend .form-control;
             &[required=""]:focus {
-                border-color: $brand;
+                border-color: $primary;
                 box-shadow: 0 1px 1px rgba(164, 63, 51, 0.2) inset, 0 0 8px rgba(164, 63, 51, 0.8);
             }
         }
@@ -334,9 +347,10 @@ form {
     input {
         &[type="text"], &[type="email"] {
             @extend .form-control;
+            background-color: $secondary;
         }
         &[required=""]:focus {
-            border-color: $brand;
+            border-color: $primary;
             box-shadow: 0 1px 1px rgba(164, 63, 51, 0.2) inset, 0 0 8px rgba(164, 63, 51, 0.8);
         }
 
@@ -350,19 +364,19 @@ form {
     FOOTER
    ========================================================================== */
 footer {
-    background-color: #1D1D1D;
-    border-top: 1px solid $brand;
+    border-top: 1px solid $primary;
     .col-md-6.contact-info {
         text-align: right;
         a {
             &:hover {
-                color: $brand-secondary;
+                color: $secondary;
             }
         }
     }
     .footer-text p {
         font-size: 0.8rem;
         color: rgba(189, 189, 189, 1.0);
+        margin-bottom: 0.3rem;
     }
     i {
         position: relative;
@@ -372,7 +386,7 @@ footer {
         color: rgba(189, 189, 189,1.0);
     }
     span.copyright {
-        color: $brand;
+        color: $primary;
     }
 }
 
@@ -386,6 +400,12 @@ footer {
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
+/* ==========================================================================
+    NAVIGATION
+   ========================================================================== */
+    header nav ul.navbar-nav a {
+        font-size: 0.7rem;
+   }
 /* ==========================================================================
     FOOTER
    ========================================================================== */
@@ -428,7 +448,7 @@ footer {
 /* ==========================================================================
     NAVIGATION
    ========================================================================== */
-   .navbar-expand-sm {
+    header nav ul.navbar-nav a {
         font-size: 0.67rem;
    }
 /* ==========================================================================
@@ -441,10 +461,26 @@ footer {
         }
     }
 /* ==========================================================================
+    TABLE
+   ========================================================================== */
+    table td {
+        font-size: 0.67rem;
+   }
+/* ==========================================================================
+    AUDIO CONTROLS
+   ========================================================================== */
+    audio {
+        width: 100%;
+   }
+/* ==========================================================================
     FOOTER
    ========================================================================== */
     footer {
         .col-md-6, .col-md-6.contact-info {
+            text-align: center;
+        }
+        .heart-rate {
+            margin: 0 auto;
             text-align: center;
         }
         p {
