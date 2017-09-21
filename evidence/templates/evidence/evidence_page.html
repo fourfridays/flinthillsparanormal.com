@@ -8,9 +8,21 @@
             <div class="col-sm-12">
                 <h1 class="my-3">{{ page.title }}</h1>
                 <article>
-                    {% for block in page.body %}
-                        <section>{% include_block block %}</section>
-                    {% endfor %}
+                    <section>
+                        <div class="evidence-block">
+                            <table class="table">
+                                <tr>
+                                    <td>Date</td>
+                                    <td>Title</td>
+                                    <td>Sound</td>
+                                    <td class="text-center">Image</td>
+                                </tr>
+                                {% for block in page.body %}
+                                    <tr>{% include_block block %}</tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </section>
                 </article>
             </div>
         </div>
