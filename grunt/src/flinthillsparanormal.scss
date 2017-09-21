@@ -196,6 +196,13 @@ header {
 }
 
 
+/* Home */
+.flinthillsparanormal h3 {
+    padding: 8px;
+    background-color: $secondary;
+}
+
+
 /* Background Colors */
 article {
     &.white-smoke {
@@ -252,9 +259,15 @@ article {
 
 
 /* News */
-article.news-index {
-    padding: 12px;
-    background-color: #eee;
+article.news-index{
+    h2 {
+        padding: 8px;
+        background-color: $secondary;
+        a:hover {
+            color: #000;
+            text-decoration: none;
+        }
+    }
 }
 
 /* Heart Rate */
