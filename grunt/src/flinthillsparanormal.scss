@@ -61,17 +61,18 @@ $light-gray: #666666;
 
 body {
     font-family: 'Roboto Condensed', sans-serif;
-    color: #4E4D4A;
+    background-color: #1D1D1D;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Trirong', serif;
-    color: #403F3C;
+    color: #BD3C4E;
 }
 h1 {
     text-transform: uppercase;
 }
 p {
     font-size: 0.95rem;
+    color: #eee;
 }
 a {
     color: $brand;
@@ -261,14 +262,13 @@ article.news-index {
   width: 150px;
   height: 73px;
   position: relative;
-  margin: 20px auto;
 }
 
 .fade-in {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #FFFFFF;
+  background-color: #1D1D1D;
   top: 0;
   right: 0;
   animation: heartRateIn 2.5s linear infinite;
@@ -286,7 +286,7 @@ article.news-index {
   background: -webkit-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
   background: -o-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
   background: -ms-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
-  background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 80%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to right, rgba(29, 29, 29, 1) 0%, rgba(29, 29, 29, 1) 80%, rgba(29, 29, 29, 0) 100%);
 }
 
 @keyframes heartRateIn {
