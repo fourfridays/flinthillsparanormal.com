@@ -1,22 +1,17 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<div class="evidence-block">
-    <table class="table table-striped">
-        <tr>
-            <td>Date</td>
-            <td>Title</td>
-            <td>Sound</td>
-            <td class="text-center">Image</td>
-        </tr>
-        <tr>
-            <td>{% include_block value.date %}</td>
-            <td>{% include_block value.title %}</td>
-            <td>{% include_block value.sound %}</td>
-            <td class="text-center">
-                {% image value.image width-140 as theimage %}
-                <img class="img-fluid thumbnail" src="{{ theimage.url }}" width="{{ theimage.width }}" height="{{ theimage.height }}" alt="{{ theimage.alt }}" />
-                <p class="py-0 small">Touch/Click to Enlarge</p>
-            </td>
-        </tr>
-    </table> 
-</div>
+
+<td>{% include_block value.date %}</td>
+<td>{% include_block value.title %}</td>
+<td>
+    <audio controls>
+        <source src="{% include_block value.sound.file.url %}" type="audio/mp3">
+        <p>Your browser doesn't support HTML5 audio. Here is a <a href="{% include_block value.sound.file.url %}">link to the audio</a> instead.</p>
+    </audio>
+</td>
+<td class="text-center">
+    {% image value.image width-140 as theimage %}
+    {% image value.image width-440 as lightboximage %}
+    <a href="{{ lightboximage.url }}" data-lightbox="{% include_block value.title %}" data-title="{{ theimage.alt }}"><img class="img-fluid thumbnail" src="{{ theimage.url }}" width="{{ theimage.width }}" height="{{ theimage.height }}" alt="{{ theimage.alt }}" /></a>
+    <p class="py-0 small">Touch/Click to Enlarge</p>
+</td>
