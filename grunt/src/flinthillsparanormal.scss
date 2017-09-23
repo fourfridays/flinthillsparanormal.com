@@ -229,16 +229,17 @@ article {
     width: 100%; /* for IE 6 */
     figcaption {
         max-width: 45%;
-        background-color: rgba($primary, 0.6);
+        background-color: rgba($primary, 0.8);
         position: absolute;
-        top: 65%;
+        top: 55%;
         left: 10%;  
         transform: translate(-10%, -65%);
         padding: 10px; 
         h2 {
             color: #f0f0f0;
-            font-size: 3.1em;
+            font-size: 2.2em;
             margin-bottom: 0;
+            text-transform: uppercase;
         }
         p.fine-print {
             color: #ffffff;
