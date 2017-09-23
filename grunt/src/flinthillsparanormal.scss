@@ -366,7 +366,7 @@ form {
    ========================================================================== */
 footer {
     border-top: 1px solid $primary;
-    .col-md-6.contact-info {
+    .contact-info {
         text-align: right;
         a {
             &:hover {
@@ -411,7 +411,7 @@ footer {
     FOOTER
    ========================================================================== */
    footer {
-        p {
+        .footer-text p {
             font-size: 0.67rem;
         }
     }
@@ -477,14 +477,14 @@ footer {
     FOOTER
    ========================================================================== */
     footer {
-        .col-md-6, .col-md-6.contact-info {
+        .col-md-6, .contact-info {
             text-align: center;
         }
         .heart-rate {
             margin: 0 auto;
             text-align: center;
         }
-        p {
+        .footer-text p {
             font-size: 0.67rem;
         }
     }
