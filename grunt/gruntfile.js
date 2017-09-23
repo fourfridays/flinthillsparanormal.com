@@ -17,16 +17,16 @@ module.exports = function(grunt) {
         },
         dist: {
             files: {
-                //'/mnt/volume-nyc1-01-part2/static/js/fourfridays.min.js': ['<%= concat.dist.dest %>'],
-                '../static/js/flinthillsparanormal.min.js': ['<%= concat.dist.dest %>'],
+                '/mnt/volume-nyc1-01-part4/static/js/flinthillsparanormal.min.js': ['<%= concat.dist.dest %>'],
+                //'../static/js/flinthillsparanormal.min.js': ['<%= concat.dist.dest %>'],
             }
         }
     },
     sass: {                              // Task
       dist: {                            // Target
         files: {                         // Dictionary of files
-          //'/mnt/volume-nyc1-01-part2/static/css/fourfridays.css': 'src/fourfridays.scss'
-          '../static/css/flinthillsparanormal.css': 'src/flinthillsparanormal.scss'
+          '/mnt/volume-nyc1-01-part4/static/css/flinthillsparanormal.css': 'src/flinthillsparanormal.scss'
+          //'../static/css/flinthillsparanormal.css': 'src/flinthillsparanormal.scss'
         }
       }
     },
@@ -34,9 +34,9 @@ module.exports = function(grunt) {
       target: {
         files: [{
           expand: true,
-          cwd: '../static/css',
+          cwd: '/mnt/volume-nyc1-01-part4/static/css',
           src: ['*.css', '!*.min.css'],
-          dest: '../static/css',
+          dest: '/mnt/volume-nyc1-01-part4/static/css',
           ext: '.min.css'
         }]
       }
