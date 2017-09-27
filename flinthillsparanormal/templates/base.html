@@ -16,7 +16,7 @@
 
         {# Global stylesheets #}
         <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:600|Lato" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/flinthillsparanormal.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/flinthillsparanormal.min.css' %}">
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
@@ -59,7 +59,7 @@
         </footer>
 
         {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/flinthillsparanormal.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/flinthillsparanormal.min.js' %}" async></script>
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
