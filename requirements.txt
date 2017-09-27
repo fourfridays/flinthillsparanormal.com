@@ -1,7 +1,7 @@
 beautifulsoup4==4.6.0
 certifi==2017.7.27.1
 chardet==3.0.4
-Django==1.11.4
+Django==1.11.5
 django-modelcluster==3.1
 django-taggit==0.22.1
 django-treebeard==4.1.2
@@ -14,9 +14,9 @@ Pillow==4.2.1
 psycopg2==2.7.3.1
 pytz==2017.2
 requests==2.18.4
-six==1.10.0
+six==1.11.0
 Unidecode==0.4.21
 urllib3==1.22
-wagtail==1.12.1
+wagtail==1.12.2
 webencodings==0.5.1
 Willow==0.4
