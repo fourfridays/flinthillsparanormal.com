@@ -52,15 +52,6 @@ class AlignedH3Block(StructBlock):
     alignment = AlignmentChoiceBlock(default='normal')
 
 
-class BackgroundColorBlock(FieldBlock):
-    field = forms.ChoiceField(choices=(
-        ('normal', 'Normal'),
-        ('red-apple', 'Red Apple'),
-        ('white-smoke', 'White Smoke'),
-        ('ebony-clay', 'Ebony Clay'),
-    ))
-
-
 class FontAwesomeIconSizeBlock(FieldBlock):
     field = forms.ChoiceField(choices=(
         ('lg', 'fa-lg'), 
@@ -125,7 +116,6 @@ class HtmlFormatBlock(StreamBlock):
 
 class SingleColumnBlock(StructBlock):
     column = HtmlFormatBlock()
-    background_color = BackgroundColorBlock()
 
     class Meta:
         template = 'single_column_block.html'
@@ -135,7 +125,6 @@ class SingleColumnBlock(StructBlock):
 class TwoColumnBlock(StructBlock):
     left_column = HtmlFormatBlock()
     right_column = HtmlFormatBlock()
-    background_color = BackgroundColorBlock()
 
     class Meta:
         template = 'two_column_block.html'
@@ -146,7 +135,6 @@ class ThreeColumnBlock(StructBlock):
     left_column = HtmlFormatBlock()
     center_column = HtmlFormatBlock()
     right_column = HtmlFormatBlock()
-    background_color = BackgroundColorBlock()
 
     class Meta:
         template = 'three_column_block.html'
@@ -158,7 +146,6 @@ class FourColumnBlock(StructBlock):
     left_column_2 = HtmlFormatBlock()
     right_column_1 = HtmlFormatBlock()
     right_column_2 = HtmlFormatBlock()
-    background_color = BackgroundColorBlock()
 
     class Meta:
         template = 'four_column_block.html'

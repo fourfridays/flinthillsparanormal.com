@@ -203,26 +203,6 @@ header {
 }
 
 
-/* Background Colors */
-article {
-    &.white-smoke {
-        background-color: rgba(236, 236, 236, 1);
-    }
-    &.aqua-island {
-        background-color: rgba(162, 222, 208, 1);
-    }
-    &.ebony-clay {
-        background-color: rgba(34, 49, 63, 0.4);
-    }
-    &.red-apple {
-        background-color: rgba(183, 28, 28, 0.8);
-    }
-    &.full-width {
-        padding: 20px 0;
-    }
-}
-
-
 /* Hero Images */
 .block-hero_image figure.overlay {
     position: relative; 
