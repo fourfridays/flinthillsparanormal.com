@@ -1,7 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 
-{% image value.image width-320 as theimage %}
+{% image value.image width-316 as theimage %}
 
 <div class="card card-inverse" style="width: 20rem; background-color: #333; border-color: #333;">
   <img class="img-fluid card-img-top" src="{{ theimage.url }}" alt="{{ theimage.alt }}">
