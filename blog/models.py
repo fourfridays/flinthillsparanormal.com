@@ -77,6 +77,7 @@ class BlogStreamBlock(StreamBlock):
     aligned_image = ImageBlock(label="Aligned image", icon="image")
     pullquote = PullQuoteBlock()
     aligned_html = AlignedHTMLBlock(icon="code", label='Raw HTML')
+    embed = EmbedBlock(required=False)
     document = DocumentChooserBlock(icon="doc-full-inverse")
 
 
