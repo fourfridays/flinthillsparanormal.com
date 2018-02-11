@@ -11,6 +11,7 @@ from wagtail.wagtailadmin.edit_handlers import StreamFieldPanel
 from wagtail.wagtailcore.blocks import StructBlock, CharBlock,  DateBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
+from wagtail.wagtailembeds.blocks import EmbedBlock
 
 
 class EvidenceBlock(StructBlock):
@@ -18,7 +19,7 @@ class EvidenceBlock(StructBlock):
     date = DateBlock()
     sound = DocumentChooserBlock(required=False, help_text='Select or upload evidence sound clip')
     image = ImageChooserBlock(required=False, help_text='Select or upload evidence image')
-    document = DocumentChooserBlock(required=False, help_text='Select or upload evidence document')
+    embed = EmbedBlock(required=False)
 
     class Meta:
         template = 'evidence_block.html'
