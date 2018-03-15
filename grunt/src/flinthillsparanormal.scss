@@ -1,5 +1,4 @@
 @import '../node_modules/bootstrap/scss/bootstrap';
-@import 'font-awesome-custom';
 @import '../node_modules/lightbox2/dist/css/lightbox';
 
 $primary: rgba(189, 60, 78, 1);
@@ -54,7 +53,7 @@ $secondary: rgba(238, 238, 238, 1);
 .material-icons.md-108 { font-size: 108px; }
 .material-icons.md-120 { font-size: 120px; }
 
-.fa {
+.svg-inline--fa {
     color: #BD3C4E;
 }
 
