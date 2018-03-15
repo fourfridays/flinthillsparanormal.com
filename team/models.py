@@ -2,14 +2,14 @@ from __future__ import absolute_import, unicode_literals
 
 from django.db import models
 
-from wagtail.wagtailcore.models import Page
+from wagtail.core.models import Page
 
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailadmin.edit_handlers import StreamFieldPanel
+from wagtail.core.fields import StreamField
+from wagtail.core import blocks
+from wagtail.admin.edit_handlers import StreamFieldPanel
 
-from wagtail.wagtailcore.blocks import StructBlock, CharBlock, TextBlock, RawHTMLBlock
-from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.core.blocks import StructBlock, CharBlock, TextBlock, RawHTMLBlock
+from wagtail.images.blocks import ImageChooserBlock
 
 
 class TeamBlock(StructBlock):

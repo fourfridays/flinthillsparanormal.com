@@ -1,19 +1,27 @@
 from django import template
 from django.conf import settings
 
+from wagtail.core.models import Page
+
 register = template.Library()
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def get_site_root(context):
     # NB this returns a core.Page, not the implementation-specific model used
     # so object-comparison to self will return false as objects would differ
     return context['request'].site.root_page
 
-
 def has_menu_children(page):
     return page.get_children().live().in_menu().exists()
 
+def has_children(page):
+    # Generically allow index pages to list their children
+    return page.get_children().live().exists()
+
+def is_active(page, current_page):
+    # To give us active state on main navigation
+    return (current_page.url.startswith(page.url) if current_page else False)
 
 # Retrieves the top menu items - the immediate children of the parent page
 # The has_menu_children method is necessary because the bootstrap menu requires
