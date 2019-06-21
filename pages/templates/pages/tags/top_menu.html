@@ -11,14 +11,17 @@
     </button>
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{% pageurl site_root %}">Home <span class="sr-only">(current)</span></a>
+        <ul class="navbar-nav mr-auto">
             {% for menuitem in menuitems %}
-                <li class="nav-item">
-                    <a class="nav-link {% if menuitem.active %}active{% endif %}" href="{% pageurl menuitem %}">{{ menuitem.title }} {% if menuitem.active %}<span class="sr-only">(current)</span>{% endif %}</a>
+                <li class="nav-item dropdown{% if menuitem.active %} active{% endif %}">
+                    {% if menuitem.show_dropdown %}
+                        <a class="nav-link dropdown-toggle" href="{{ menuitem.url }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ menuitem.title }}</a>
+                        {% top_menu_children parent=menuitem %}
+                    {% else %}
+                        <a class="nav-link" href="{% pageurl menuitem %}">{{ menuitem.title }} <span class="sr-only">(current)</span></a>
+                    {% endif %}
                 </li>
-            {% endfor %}                   
+            {% endfor %}
         </ul>
     </div>
 </nav>

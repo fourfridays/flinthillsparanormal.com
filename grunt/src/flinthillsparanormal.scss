@@ -149,6 +149,11 @@ header {
         ul {
             &.navbar-nav {
                 a {
+                    &.dropdown-item {
+                        &:hover, &.active {
+                            color: #000;
+                        }
+                    }
                     font-size: 0.8em;
                     text-transform: uppercase;
                     font-weight: 600;
