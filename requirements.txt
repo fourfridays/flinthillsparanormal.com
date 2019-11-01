@@ -21,7 +21,7 @@ idna==2.6
 jmespath==0.9.3
 l18n==2016.6.4
 olefile==0.45.1
-Pillow==5.1.0
+Pillow==6.2.0
 psycopg2==2.7.4
 psycopg2-binary==2.7.4
 python-dateutil==2.6.1
