@@ -1,0 +1,18 @@
+{% load navigation_tags static %}
+
+<nav class="navbar navbar-expand-md bg-light" role="navigation">
+    <a class="navbar-brand p-0" href="/" title="Flint Hills Paranormal"><img class="img-fluid" src="{% static 'images/flinthillsparanormal-logo.png' %}" alt="Flint Hills Paranormal"/></a>
+    <button class="mx-2 navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    {% block main_navigation %}
+        <div class="collapse navbar-collapse" id="main-navigation" role="navigation" aria-label="Primary site navigation">
+            <ul class="navbar-nav mr-auto">
+                {# main_menu is defined in pages/templatetags/navigation_tags.py #}
+                {% get_site_root as site_root %}
+                {% top_menu parent=site_root calling_page=self %}
+            </ul>
+        </div>
+    {% endblock %}
+</nav>

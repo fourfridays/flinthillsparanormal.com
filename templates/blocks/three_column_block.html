@@ -1,0 +1,15 @@
+<article class="{% if self.background_color != 'normal' %}{{ self.background_color }} {% endif %}text-center {% if self.alignment != 'center' %}text-sm-{{ self.alignment }} {% endif %}py-4 py-sm-5">
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-12 col-sm-4">
+                {% include "includes/streamfield.html" with content=self.left_column only %}
+            </div>
+            <div class="col-12 col-sm-4">
+                {% include "includes/streamfield.html" with content=self.middle_column only %}
+            </div>
+            <div class="col-12 col-sm-4">
+                {% include "includes/streamfield.html" with content=self.right_column only %}
+            </div>
+        </div>
+    </div>
+</article>
