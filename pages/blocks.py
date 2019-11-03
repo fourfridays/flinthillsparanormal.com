@@ -1,9 +1,10 @@
 from django import forms
 
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.core.blocks import (
-    BooleanBlock, CharBlock, ChoiceBlock, FieldBlock, PageChooserBlock, RawHTMLBlock, RichTextBlock, StreamBlock, StructBlock, TextBlock, URLBlock
+    BooleanBlock, CharBlock, ChoiceBlock, DateBlock, FieldBlock, PageChooserBlock, RawHTMLBlock, RichTextBlock, StreamBlock, StructBlock, TextBlock, URLBlock
 )
 from wagtail.contrib.table_block.blocks import TableBlock
 
@@ -56,6 +57,17 @@ class EquipmentBlock(StructBlock):
 
     class Meta:
         template = 'blocks/equipment_block.html'
+
+
+class EvidenceBlock(StructBlock):
+    title = CharBlock(help_text='Evidence title')
+    date = DateBlock()
+    sound = DocumentChooserBlock(required=False, help_text='Select or upload evidence sound clip')
+    image = ImageChooserBlock(required=False, help_text='Select or upload evidence image')
+    embed = EmbedBlock(required=False)
+
+    class Meta:
+        template = 'blocks/evidence_block.html'
 
 
 class IconBlock(StructBlock):

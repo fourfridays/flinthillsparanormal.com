@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags %}
+{% block body_class %}{{ self.title }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{ self.title }}</h1>
+        {{ self.body }}
+    </div>
+{% endblock %}
