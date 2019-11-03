@@ -5,7 +5,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         concat: {
             dist: {
-                src: ['node_modules/jquery/dist/jquery.slim.js', 'node_modules/bootstrap/js/dist/util.js', 'node_modules/bootstrap/js/dist/collapse.js', 'node_modules/lightbox2/dist/js/lightbox.js', 'src/flinthillsparanormal.js'],
+                src: ['node_modules/jquery/dist/jquery.js', 'node_modules/popper.js/dist/umd/popper.min.js', 'node_modules/bootstrap/js/dist/util.js', 'node_modules/bootstrap/js/dist/collapse.js', 'node_modules/bootstrap/js/dist/dropdown.js', 'node_modules/lightbox2/dist/js/lightbox.js', 'src/flinthillsparanormal.js'],
                 dest: 'dist/flinthillsparanormal.js'
             }
         },

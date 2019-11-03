@@ -163,21 +163,10 @@ header {
                     }
                 }
             }
-            &.social-media {
-                flex-direction: row;
-                display: flex;
-                margin-top: 0;
-                padding: 0;
-                margin-bottom: 0;
-                font-size: 1.3em;
-            }
-            li {
-                float: left;
-                list-style: none;
-            }
         }
     }
 }
+
 
 /* ==========================================================================
   CONTENT
