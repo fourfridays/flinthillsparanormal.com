@@ -1,0 +1,11 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+
+{% image value.image width-316 as theimage %}
+
+<div class="card card-inverse" style="width: 20rem; background-color: #333; border-color: #333;">
+  <img class="img-fluid card-img-top" src="{{ theimage.url }}" alt="{{ theimage.alt }}">
+  <div class="card-block">
+    <h4 class="card-title px-3 pt-2">{% include_block value.title %}</h4>
+    <p class="card-text px-3 py-2">{% include_block value.description %}</p>
+</div>

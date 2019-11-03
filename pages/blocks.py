@@ -49,6 +49,15 @@ class ButtonBlock(StructBlock):
         template = 'blocks/button_block.html'
 
 
+class EquipmentBlock(StructBlock):
+    image = ImageChooserBlock(help_text='Select or upload equipment image')
+    title = CharBlock(help_text='Equipment title')
+    description = TextBlock(help_text='Equipment description')
+
+    class Meta:
+        template = 'blocks/equipment_block.html'
+
+
 class IconBlock(StructBlock):
     icon = ChoiceBlock([
         ('font-awesome', 'Font Awesome'),
