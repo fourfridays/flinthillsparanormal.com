@@ -46,6 +46,7 @@ aldryn_addons.settings.load(locals())
 INSTALLED_APPS.extend([
     'equipment',
     'evidence',
+    'news',
     'pages',
     'team',
     

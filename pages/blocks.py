@@ -176,6 +176,18 @@ class BaseStreamBlock(StreamBlock):
     raw_html = AlignedRAWHTMLBlock()
 
 
+class NewsStreamBlock(StreamBlock):
+    heading = HeadingBlock()
+    intro = RichTextBlock(icon='pilcrow', template='blocks/paragraph_block')
+    paragraph = RichTextBlock(icon='pilcrow', template='blocks/paragraph_block')
+    image = ImageBlock(label="Aligned image", icon="image")
+    embed = EmbedBlock(help_text='Insert an embed URL e.g https://www.youtube.com/embed/SGJFWirQ3ks',
+        icon='code',
+        template='blocks/embed_block.html')
+    document = DocumentChooserBlock(icon="doc-full-inverse")
+    raw_html = AlignedRAWHTMLBlock(icon="code", label='Raw HTML')
+
+
 class SingleColumnBlock(StructBlock):
     column = BaseStreamBlock()
     alignment = AlignmentBlock(default='left')

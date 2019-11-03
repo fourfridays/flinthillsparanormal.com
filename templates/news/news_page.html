@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-11">
+               {% include "news/news_post.html" with news=self %}
+            </div>
+            <div class="col-md-1">
+            </div>
+       </div>
+   </div>
+{% endblock %}
