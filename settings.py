@@ -47,7 +47,8 @@ INSTALLED_APPS.extend([
     'equipment',
     'evidence',
     'pages',
-
+    'team',
+    
     'wagtail.contrib.table_block',
 ])
 

@@ -145,6 +145,15 @@ class HeadingBlock(StructBlock):
         template = 'blocks/heading_block.html'
 
 
+class TeamBlock(StructBlock):
+    image = ImageChooserBlock()
+    title = CharBlock(help_text='Name and title')
+    bio = TextBlock()
+
+    class Meta:
+        template = 'blocks/team_block.html'
+
+
 # StreamBlocks
 class BaseStreamBlock(StreamBlock):
     """
