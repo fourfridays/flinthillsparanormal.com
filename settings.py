@@ -44,8 +44,12 @@ aldryn_addons.settings.load(locals())
 # for guidance on managing these settings.
 
 INSTALLED_APPS.extend([
+    'equipment',
+    'evidence',
+    'news',
     'pages',
-
+    'team',
+    
     'wagtail.contrib.table_block',
 ])
 

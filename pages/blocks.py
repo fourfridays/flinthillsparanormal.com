@@ -1,9 +1,10 @@
 from django import forms
 
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.core.blocks import (
-    BooleanBlock, CharBlock, ChoiceBlock, FieldBlock, PageChooserBlock, RawHTMLBlock, RichTextBlock, StreamBlock, StructBlock, TextBlock, URLBlock
+    BooleanBlock, CharBlock, ChoiceBlock, DateBlock, FieldBlock, PageChooserBlock, RawHTMLBlock, RichTextBlock, StreamBlock, StructBlock, TextBlock, URLBlock
 )
 from wagtail.contrib.table_block.blocks import TableBlock
 
@@ -47,6 +48,26 @@ class ButtonBlock(StructBlock):
     class Meta:
         icon = 'pick'
         template = 'blocks/button_block.html'
+
+
+class EquipmentBlock(StructBlock):
+    image = ImageChooserBlock(help_text='Select or upload equipment image')
+    title = CharBlock(help_text='Equipment title')
+    description = TextBlock(help_text='Equipment description')
+
+    class Meta:
+        template = 'blocks/equipment_block.html'
+
+
+class EvidenceBlock(StructBlock):
+    title = CharBlock(help_text='Evidence title')
+    date = DateBlock()
+    sound = DocumentChooserBlock(required=False, help_text='Select or upload evidence sound clip')
+    image = ImageChooserBlock(required=False, help_text='Select or upload evidence image')
+    embed = EmbedBlock(required=False)
+
+    class Meta:
+        template = 'blocks/evidence_block.html'
 
 
 class IconBlock(StructBlock):
@@ -124,6 +145,15 @@ class HeadingBlock(StructBlock):
         template = 'blocks/heading_block.html'
 
 
+class TeamBlock(StructBlock):
+    image = ImageChooserBlock()
+    title = CharBlock(help_text='Name and title')
+    bio = TextBlock()
+
+    class Meta:
+        template = 'blocks/team_block.html'
+
+
 # StreamBlocks
 class BaseStreamBlock(StreamBlock):
     """
@@ -144,6 +174,18 @@ class BaseStreamBlock(StreamBlock):
     icon_block = IconBlock()
     table = TableBlock(template='includes/table.html')
     raw_html = AlignedRAWHTMLBlock()
+
+
+class NewsStreamBlock(StreamBlock):
+    heading = HeadingBlock()
+    intro = RichTextBlock(icon='pilcrow', template='blocks/paragraph_block')
+    paragraph = RichTextBlock(icon='pilcrow', template='blocks/paragraph_block')
+    image = ImageBlock(label="Aligned image", icon="image")
+    embed = EmbedBlock(help_text='Insert an embed URL e.g https://www.youtube.com/embed/SGJFWirQ3ks',
+        icon='code',
+        template='blocks/embed_block.html')
+    document = DocumentChooserBlock(icon="doc-full-inverse")
+    raw_html = AlignedRAWHTMLBlock(icon="code", label='Raw HTML')
 
 
 class SingleColumnBlock(StructBlock):

@@ -1,0 +1,30 @@
+{% load wagtailcore_tags static %}
+
+<div class="article">
+    <h1 class="mt-4">{{ news.title }}</h1>
+    
+    <p class="small text-muted">
+        Posted by {{ news.author.first_name }} {{ news.author.last_name }} on {{ news.date }}        
+        {% if news.categories.all %}
+            in 
+            {% for cat in news.categories.all %}
+                <span style="text-transform: lowercase;">{{ cat.category.name }}</span> {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        {% endif %}
+    </p>
+
+    <hr style="margin-top: 0;">
+
+    {% include "includes/streamfield.html" with content=news.body %}
+
+    {% if news.tags.all %}
+        <hr style="margin-top: 0; margin-bottom: 10px; clear: both;">
+
+        <div class="my-2 small .text-muted">    
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            {% for tag in news.tags.all %}
+                {{ tag }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}        
+        </div>
+    {% endif %}
+</div>

@@ -1,8 +1,9 @@
-{% load navigation_tags static %}
+{% load navigation_tags wagtailcore_tags static %}
+{% get_site_root as site_root %}
 
-<nav class="navbar navbar-expand-md bg-light" role="navigation">
-    <a class="navbar-brand p-0" href="/" title="Flint Hills Paranormal"><img class="img-fluid" src="{% static 'images/flinthillsparanormal-logo.png' %}" alt="Flint Hills Paranormal"/></a>
-    <button class="mx-2 navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg bg-light" role="navigation">
+    <a class="navbar-brand p-0" href="{% pageurl site_root %}" title="Flint Hills Paranormal"><img class="img-fluid" src="{% static 'images/flinthillsparanormal-logo.png' %}" alt="Flint Hills Paranormal"/></a>
+    <button class="mx-2 navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navigation" aria-controls="main-navigation" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 

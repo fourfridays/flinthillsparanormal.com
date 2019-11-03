@@ -163,21 +163,10 @@ header {
                     }
                 }
             }
-            &.social-media {
-                flex-direction: row;
-                display: flex;
-                margin-top: 0;
-                padding: 0;
-                margin-bottom: 0;
-                font-size: 1.3em;
-            }
-            li {
-                float: left;
-                list-style: none;
-            }
         }
     }
 }
+
 
 /* ==========================================================================
   CONTENT
@@ -201,14 +190,14 @@ header {
 
 
 /* Home */
-.flinthillsparanormal h3 {
+.home h3 {
     padding: 8px;
     background-color: $secondary;
 }
 
 
 /* Hero Images */
-.block-hero_image figure.overlay {
+.hero-image figure {
     position: relative; 
     width: 100%; /* for IE 6 */
     figcaption {
@@ -218,15 +207,12 @@ header {
         top: 55%;
         left: 10%;  
         transform: translate(-10%, -65%);
-        padding: 10px; 
         h2 {
             color: #f0f0f0;
-            font-size: 2.2em;
-            margin-bottom: 0;
-            text-transform: uppercase;
+            font-size: 2.2rem;
         }
-        p.fine-print {
-            color: #ffffff;
+        small {
+            color: #d2d2d2;
         }
     }
     .photo-credit {
@@ -234,7 +220,6 @@ header {
         bottom: 0; /* position will be on bottom */
         width: auto;
         right: 0;
-        padding: 4px;
         background-color: #000;
         color: #fff;
         opacity: 0.5; /* transparency */
@@ -429,14 +414,10 @@ footer {
 /* ==========================================================================
     HERO IMAGE
    ========================================================================== */
-    .block-hero_image figure.overlay {
+    .hero-image figure {
         figcaption {
-            padding: 6px; 
             h2 {
-                font-size: 1.2em;
-            }
-            p.fine-print {
-                font-size: 0.6em;
+                font-size: 1.2rem;
             }
         }
         .photo-credit {
@@ -487,11 +468,11 @@ footer {
 /* ==========================================================================
     HERO IMAGES
    ========================================================================== */
-    .block-hero_image figure.overlay {
+    .hero-image figure {
         figcaption {
             max-width: 55%;
             h2 {
-                font-size: 0.9em;
+                font-size: 0.9rem;
             }
         }
         .photo-credit {
