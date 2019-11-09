@@ -32,7 +32,7 @@ INSTALLED_ADDONS = [
 # Note that any settings you provide before the next two lines are liable to be
 # overwritten, so they should be placed *after* this section.
 
-import aldryn_addons.settings, os
+import aldryn_addons.settings
 aldryn_addons.settings.load(locals())
 
 # Your own Django settings can be applied from here on. Key settings like
@@ -55,8 +55,11 @@ INSTALLED_APPS.extend([
     'wagtail.contrib.table_block',
 ])
 
+
+import os
+from getenv import env
 # =================================
 # =           RECPATCHA           =
 # =================================
-RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY")
-RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY")
+RECAPTCHA_PUBLIC_KEY = env('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = env('RECAPTCHA_PRIVATE_KEY')
