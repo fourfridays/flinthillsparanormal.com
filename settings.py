@@ -32,8 +32,7 @@ INSTALLED_ADDONS = [
 # Note that any settings you provide before the next two lines are liable to be
 # overwritten, so they should be placed *after* this section.
 
-import os
-import aldryn_addons.settings
+import aldryn_addons.settings, os
 aldryn_addons.settings.load(locals())
 
 # Your own Django settings can be applied from here on. Key settings like
@@ -56,12 +55,8 @@ INSTALLED_APPS.extend([
     'wagtail.contrib.table_block',
 ])
 
-# To see the settings that have been applied, use the Django diffsettings 
-# management command. 
-# See https://docs.divio.com/en/latest/how-to/configure-settings.html#list
-
 # =================================
-# =           RECAPTCHA           =
+# =           RECPATCHA           =
 # =================================
-RECAPTCHA_PUBLIC_KEY = os.environ.get(str('RECAPTCHA_PUBLIC_KEY'))
-RECAPTCHA_PRIVATE_KEY = os.environ.get(str('RECAPTCHA_PRIVATE_KEY'))
+RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY")
+RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY")
