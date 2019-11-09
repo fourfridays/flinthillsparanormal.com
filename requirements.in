@@ -4,3 +4,5 @@ https://control.divio.com/api/v1/apps/serve/aldryn-django/2.2.6.1/1a41eb64-52a8-
 https://control.divio.com/api/v1/apps/serve/aldryn-sso/1.6.0/6d90e844-d7ef-4faa-b527-5df3d49277be/aldryn-sso-1.6.0.tar.gz#egg=aldryn-sso==1.6.0
 https://control.divio.com/api/v1/apps/serve/aldryn-wagtail/2.6.2.1/aefdaf17-8135-4d3f-b292-fb205bbc61ec/aldryn-wagtail-2.6.2.1.tar.gz#egg=aldryn-wagtail==2.6.2.1
 # </INSTALLED_ADDONS>
+django-recaptcha==2.0.5
+wagtail-django-recaptcha==1.0 
