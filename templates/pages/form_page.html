@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load wagtailcore_tags %}
 {% block body_class %}{{ self.title }}{% endblock %}
+{% block head-extra %}<script src="https://www.google.com/recaptcha/api.js" async defer></script>{% endblock %}
 
 {% block content %}
     <div class="container my-4">
@@ -10,10 +11,12 @@
 
                 {{ page.intro|richtext }}
 
-                <form class="mx-4 demo" action="{% pageurl page %}" method="POST">
+                <form class="mx-4 contact" action="{% pageurl page %}" method="POST">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <input class="demo-submission" type="submit" value="Submit Form">
+                    <div class="g-recaptcha" data-sitekey="6LdyJTwUAAAAACjM1IJnzXKr_MBn0ksIJ28bHrf6"></div>
+                    <br/>
+                    <input class="contact-submission" type="submit" value="Submit Form">
                 </form>
             </div>
         </div>

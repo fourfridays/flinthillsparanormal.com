@@ -44,21 +44,11 @@ aldryn_addons.settings.load(locals())
 # for guidance on managing these settings.
 
 INSTALLED_APPS.extend([
-    'captcha',
     'equipment',
     'evidence',
     'news',
     'pages',
     'team',
-    'wagtailcaptcha',
     
     'wagtail.contrib.table_block',
 ])
-
-
-import os
-# =================================
-# =           RECPATCHA           =
-# =================================
-RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY')
-RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')

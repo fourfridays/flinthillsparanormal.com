@@ -13,7 +13,6 @@ from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
-from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
 from .blocks import ImageGridBlock, BaseStreamBlock, SingleColumnBlock, TwoColumnBlock, ThreeColumnBlock, FourColumnBlock
 
@@ -24,7 +23,7 @@ class FormField(AbstractFormField):
     page = ParentalKey('FormPage', related_name='form_fields')
 
 
-class FormPage(WagtailCaptchaEmailForm):
+class FormPage(AbstractEmailForm):
     intro = RichTextField(blank=True)
     thank_you_text = RichTextField(blank=True)
 

@@ -23,8 +23,7 @@
 
         <script src="https://kit.fontawesome.com/f252b38a95.js" crossorigin="anonymous"></script>
 
-        {% block head-extra %}
-        {% endblock head-extra %}
+        {% block head-extra %}{% endblock head-extra %}
     </head>
 
     <body class="{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}">  
