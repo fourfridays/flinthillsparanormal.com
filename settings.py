@@ -32,7 +32,6 @@ INSTALLED_ADDONS = [
 # Note that any settings you provide before the next two lines are liable to be
 # overwritten, so they should be placed *after* this section.
 
-import os
 import aldryn_addons.settings
 aldryn_addons.settings.load(locals())
 
@@ -45,17 +44,11 @@ aldryn_addons.settings.load(locals())
 # for guidance on managing these settings.
 
 INSTALLED_APPS.extend([
-    'captcha',
     'equipment',
     'evidence',
     'news',
     'pages',
     'team',
-    'wagtailcaptcha',
     
     'wagtail.contrib.table_block',
 ])
-
-# To see the settings that have been applied, use the Django diffsettings 
-# management command. 
-# See https://docs.divio.com/en/latest/how-to/configure-settings.html#list
