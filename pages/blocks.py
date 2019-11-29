@@ -2,7 +2,6 @@ from django import forms
 
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.documents.blocks import DocumentChooserBlock
-from wagtail.embeds.blocks import EmbedBlock
 from wagtail.core.blocks import (
     BooleanBlock, CharBlock, ChoiceBlock, DateBlock, FieldBlock, PageChooserBlock, RawHTMLBlock, RichTextBlock, StreamBlock, StructBlock, TextBlock, URLBlock
 )
@@ -48,6 +47,13 @@ class ButtonBlock(StructBlock):
     class Meta:
         icon = 'pick'
         template = 'blocks/button_block.html'
+
+
+class EmbedBlock(StructBlock):
+    you_tube_embed = CharBlock(required=False, help_text='Insert the embed code e.g Pha7WiAuhw4 the part that follows https://youtu.be/')
+
+    class Meta:
+        template='blocks/embed_block.html'
 
 
 class EquipmentBlock(StructBlock):
@@ -167,10 +173,7 @@ class BaseStreamBlock(StreamBlock):
     image_block = ImageBlock()
     button_block = ButtonBlock()
     image_grid_block = ImageGridBlock()
-    embed_block = EmbedBlock(
-        help_text='Insert an embed URL e.g https://www.youtube.com/embed/SGJFWirQ3ks',
-        icon='code',
-        template='blocks/embed_block.html')
+    embed_block = EmbedBlock(icon='code')
     icon_block = IconBlock()
     table = TableBlock(template='includes/table.html')
     raw_html = AlignedRAWHTMLBlock()
@@ -181,9 +184,7 @@ class NewsStreamBlock(StreamBlock):
     intro = RichTextBlock(icon='pilcrow', template='blocks/paragraph_block')
     paragraph = RichTextBlock(icon='pilcrow', template='blocks/paragraph_block')
     image = ImageBlock(label="Aligned image", icon="image")
-    embed = EmbedBlock(help_text='Insert an embed URL e.g https://www.youtube.com/embed/SGJFWirQ3ks',
-        icon='code',
-        template='blocks/embed_block.html')
+    embed = EmbedBlock(icon='code')
     document = DocumentChooserBlock(icon="doc-full-inverse")
     raw_html = AlignedRAWHTMLBlock(icon="code", label='Raw HTML')
 
