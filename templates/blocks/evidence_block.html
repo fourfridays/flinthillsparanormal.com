@@ -33,8 +33,8 @@
     </div>
     <div class="col-sm-4 text-center">
         <p><i class="fa fa-video-camera"></i></p>
-        {% if value.embed != None %}
-            {{ value.embed }}
+        {% if value.embed.you_tube_embed %}
+            {% include_block self.embed %}
         {% else %}
             <p>No video evidence</p>
         {% endif %}
