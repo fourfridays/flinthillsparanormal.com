@@ -97,7 +97,7 @@ class NewsIndexPage(Page):
 
     class Meta:
         verbose_name = _('News index')
-        #subpage_types = ['blog.BlogPage']
+    subpage_types = ['news.NewsPage']
 
 
 def get_news_context(context):
@@ -244,6 +244,8 @@ class NewsPage(Page):
     class Meta:
         verbose_name = _('News Article')
         verbose_name_plural = _('News Articles')
+
+    parent_page_types = ['news.NewsIndexPage']
 
 NewsPage.content_panels = [
     FieldPanel('title', classname="full title"),
