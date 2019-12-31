@@ -12,7 +12,6 @@
 
                 <form class="mx-4 form" action="{% pageurl page %}" method="POST">
                     {% csrf_token %}
-                    <input id="website" name="website" type="text" value="" aria-label="If you are a human, do not fill in this field." style="display:none;">
                     {{ form.as_p }}
                     <input class="form-submission" type="submit" value="Submit Form">
                 </form>

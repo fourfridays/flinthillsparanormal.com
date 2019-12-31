@@ -34,6 +34,7 @@ INSTALLED_ADDONS = [
 
 import aldryn_addons.settings
 aldryn_addons.settings.load(locals())
+import os
 
 # Your own Django settings can be applied from here on. Key settings like
 # INSTALLED_APPS, MIDDLEWARE and TEMPLATES are provided in the Aldryn Django
@@ -49,6 +50,11 @@ INSTALLED_APPS.extend([
     'news',
     'pages',
     'team',
+    'captcha',
+    'wagtailcaptcha',
     
     'wagtail.contrib.table_block',
 ])
+
+RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
