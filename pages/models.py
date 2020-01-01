@@ -12,7 +12,7 @@ from wagtail.admin.edit_handlers import (
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page
 from wagtail.images.edit_handlers import ImageChooserPanel
-from wagtail.contrib.forms.models import AbstractFormField
+from wagtail.contrib.forms.models import AbstractFormField, AbstractEmailForm
 from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
 from .blocks import ImageGridBlock, BaseStreamBlock, SingleColumnBlock, TwoColumnBlock, ThreeColumnBlock, FourColumnBlock
