@@ -25,5 +25,3 @@ Thumbs.db
 .sass-cache
 grunt/dist
 grunt/node_modules
-/static/css/flinthillsparanormal.min.css
-/static/js/flinthillsparanormal.min.js
