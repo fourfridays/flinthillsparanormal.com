@@ -139,10 +139,7 @@ a {
 header {
     nav {
         z-index: 1;
-        &.navbar {
-            padding: 0rem 1.5rem;
-        }
-        &.bg-light{
+        &.bg-dark {
             background-color: #1D1D1D !important;
             border-bottom: 1px solid $primary;
         }
@@ -157,7 +154,7 @@ header {
                     font-size: 0.8em;
                     text-transform: uppercase;
                     font-weight: 600;
-                    color: #BD3C4E;
+                    color: #BD3C4E !important;
                     &:hover, &.active {
                         color: #eee;
                     }
@@ -465,6 +462,9 @@ footer {
 
 /* Landscape phones and down */
 @media (max-width: 480px) { 
+    .navbar-brand {
+        width: 230px;
+    }
 /* ==========================================================================
     HERO IMAGES
    ========================================================================== */
