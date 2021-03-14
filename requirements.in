@@ -1,4 +1,5 @@
 # <INSTALLED_ADDONS>  # Warning: text inside the INSTALLED_ADDONS tags is auto-generated. Manual changes will be overwritten.
+https://control.divio.com/api/v1/apps/serve/aldryn-django/3.1.7.0/d132cf4b-4651-4d75-8863-eec3a08a24fa/aldryn-django-3.1.7.0.tar.gz#egg=aldryn-django==3.1.7.0
 # </INSTALLED_ADDONS>
 captcha==0.3
 wagtail-django-recaptcha==1.0
