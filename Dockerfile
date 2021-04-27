@@ -14,6 +14,9 @@ FROM divio/base:4.18-py3.6-slim-stretch
 # <BOWER>
 # </BOWER>
 
+RUN apt-get update
+RUN apt-get install -y libjpeg62-turbo-dev zlib1g-dev libwebp-dev
+
 # <PYTHON>
 ENV PIP_INDEX_URL=${PIP_INDEX_URL:-https://wheels.aldryn.net/v1/aldryn-extras+pypi/${WHEELS_PLATFORM:-aldryn-baseproject-py3}/+simple/} \
     WHEELSPROXY_URL=${WHEELSPROXY_URL:-https://wheels.aldryn.net/v1/aldryn-extras+pypi/${WHEELS_PLATFORM:-aldryn-baseproject-py3}/}
