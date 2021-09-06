@@ -81,3 +81,5 @@ WAGTAIL_SITE_NAME = 'Flint Hills Paranormal'
 RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY', default='')
 RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', default='')
 NOCAPTCHA = True
+
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', default='')
