@@ -2,8 +2,8 @@
 https://divio-addons.s3-eu-central-1.amazonaws.com/aldryn-addons/2.0.1/75074b5c-4ff7-448b-acf9-412d78472b6b/aldryn-addons-2.0.1.tar.gz#egg=aldryn-addons==2.0.1
 https://divio-addons.s3-eu-central-1.amazonaws.com/aldryn-django/3.2.6.0/e46a8d86-eb9a-4d84-84cf-237e0ffca38b/aldryn-django-3.2.6.0.tar.gz#egg=aldryn-django==3.2.6.0
 # </INSTALLED_ADDONS>
-wagtail==2.13.4
+wagtail==2.14.1
 captcha==0.3
 wagtail-django-recaptcha==1.0
-Unidecode==1.2.0
-psycopg2==2.8.6
+Unidecode==1.3.1
+psycopg2==2.9.1
