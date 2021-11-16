@@ -257,7 +257,6 @@ article.news-index{
    ========================================================================== */
 form {
     p {
-        @extend .form-group, .row;
         span.helptext {
             @extend .small;
         }
