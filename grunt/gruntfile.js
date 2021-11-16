@@ -20,6 +20,7 @@ module.exports = function(grunt) {
             files: {
                 //'/home/flinthillsparanormal/sites/flinthillsparanormal/static/js/flinthillsparanormal.min.js': ['<%= concat.dist.dest %>'],
                 '../static/js/flinthillsparanormal.min.js': ['<%= concat.dist.dest %>'],
+                '../static/js/fontawesome-free.min.js': ['node_modules/@fortawesome/fontawesome-free/js/all.js'],
             }
         }
     },
