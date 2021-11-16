@@ -189,16 +189,8 @@ article.news-index{
 }
 
 
-/* Equipment */
-.card-deck .card {
-    flex: none;
-}
-
-
 /* Heart Rate */
 .heart-rate {
-  width: 150px;
-  height: 73px;
   position: relative;
 }
 
@@ -209,7 +201,7 @@ article.news-index{
   background-color: #1D1D1D;
   top: 0;
   right: 0;
-  animation: heartRateIn 2.5s linear infinite;
+  animation: heartRateIn 6.5s linear infinite;
 }
 
 .fade-out {
@@ -218,7 +210,7 @@ article.news-index{
   height: 100%;
   top: 0;
   left: -120%;
-  animation: heartRateOut 2.5s linear infinite;
+  animation: heartRateOut 6.5s linear infinite;
   background: rgba(255, 255, 255, 1);
   background: -moz-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
   background: -webkit-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
