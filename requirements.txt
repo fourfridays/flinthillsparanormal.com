@@ -16,8 +16,6 @@ botocore==1.23.26
     # via
     #   boto3
     #   s3transfer
-captcha==0.3
-    # via -r requirements.in
 certifi==2021.10.8
     # via
     #   requests
@@ -30,17 +28,19 @@ django-filter==2.4.0
     # via wagtail
 django-modelcluster==5.2
     # via wagtail
-django-recaptcha==2.0.6
-    # via wagtail-django-recaptcha
+django-recaptcha==3.0
+    # via
+    #   -r requirements.in
+    #   wagtail-django-recaptcha
 django-storage-url==0.8.1
     # via -r requirements.in
 django-storages==1.12.3
     # via django-storage-url
-django-taggit==1.5.1
+django-taggit==2.1.0
     # via wagtail
 django-treebeard==4.5.1
     # via wagtail
-django==3.2.10
+django==4.0.2
     # via
     #   -r requirements.in
     #   django-filter
@@ -76,7 +76,6 @@ orderedmultidict==1.0.1
 pillow==8.4.0
     # via
     #   -r requirements.in
-    #   captcha
     #   wagtail
 psycopg2==2.9.3
     # via -r requirements.in
@@ -84,7 +83,6 @@ python-dateutil==2.8.2
     # via botocore
 pytz==2021.3
     # via
-    #   django
     #   django-modelcluster
     #   l18n
 requests==2.26.0
@@ -117,7 +115,7 @@ uwsgi==2.0.20
     # via -r requirements.in
 wagtail-django-recaptcha==1.0
     # via -r requirements.in
-wagtail==2.15.1
+wagtail==2.16
     # via -r requirements.in
 webencodings==0.5.1
     # via html5lib

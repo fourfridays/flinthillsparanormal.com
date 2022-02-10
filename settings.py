@@ -186,3 +186,5 @@ RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', default='')
 NOCAPTCHA = True
 
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', default='')
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
