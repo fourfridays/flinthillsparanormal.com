@@ -196,12 +196,12 @@ EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', default='')
 SERVER_EMAIL = os.environ.get('SERVER_EMAIL', default='')
 
-RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY', default='')
-RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', default='')
+RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', default='')
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', default='')
 NOCAPTCHA = False
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
-PREPEND_WWW = os.getenv('PREPEND_WWW', default=False)
+PREPEND_WWW = os.environ.get('PREPEND_WWW', default=False)
 
 # Make low-quality but small images
 WAGTAILIMAGES_JPEG_QUALITY = 40
