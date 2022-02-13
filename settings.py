@@ -15,6 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # for guidance on managing these settings.
 
 INSTALLED_APPS = [
+    'anymail',
     'equipment',
     'evidence',
     'news',
@@ -27,7 +28,6 @@ INSTALLED_APPS = [
 
     'wagtail.contrib.styleguide',
     'wagtail.contrib.table_block',
-
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.contrib.modeladmin',
@@ -181,10 +181,21 @@ MEDIA_ROOT = os.path.join('/data/media/')
 
 WAGTAIL_SITE_NAME = 'Flint Hills Paranormal'
 
+# DJANGO ANYMAIL
+ANYMAIL = {
+    "MAILGUN_API_KEY": os.environ.get('EMAIL_API_KEY', default=''),
+    "MAILGUN_SENDER_DOMAIN": os.environ.get('EMAIL_SENDER_DOMAIN', default=''),
+}
+EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', default='')
+SERVER_EMAIL = os.environ.get('SERVER_EMAIL', default='')
+
 RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY', default='')
 RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', default='')
 NOCAPTCHA = True
 
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', default='')
-
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+# Make low-quality but small images
+WAGTAILIMAGES_JPEG_QUALITY = 40
+WAGTAILIMAGES_WEBP_QUALITY = 45
