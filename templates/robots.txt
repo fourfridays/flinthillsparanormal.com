@@ -1,0 +1,6 @@
+User-agent: *
+
+Disallow: /admin/
+Disallow: /django-admin/
+Disallow: /tag/
+Sitemap: https://flinthillsparanormal.com/sitemap.xml

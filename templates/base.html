@@ -1,4 +1,5 @@
-{% load navigation_tags static wagtailuserbar %}
+{% load navigation_tags static wagtailuserbar wagtailcore_tags %}
+{% wagtail_site as current_site %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -8,7 +9,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>{% block title %}{% if self.seo_title == 'Home' %}Flint Hills Paranormal{% elif self.seo_title %}{{ self.seo_title }} | Flint Hills Paranormal{% else %}{{ self.title }} | Flint Hills Paranormal{% endif %}{% endblock %}</title>
+        <title>{% block title %}{% if self.seo_title == 'Home' %}{{ current_site.site_name }}{% elif self.seo_title %}{{ self.seo_title }} | {{ current_site.site_name }}{% else %}{{ self.title }} | {{ current_site.site_name }}{% endif %}{% endblock %}</title>
 
         {% if self.search_description %}
             <meta name="description" content="{{ self.search_description }}" />
