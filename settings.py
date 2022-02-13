@@ -201,6 +201,7 @@ RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY', default='')
 NOCAPTCHA = False
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+PREPEND_WWW = os.getenv('PREPEND_WWW', default=False)
 
 # Make low-quality but small images
 WAGTAILIMAGES_JPEG_QUALITY = 40
