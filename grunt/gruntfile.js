@@ -5,7 +5,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         concat: {
             dist: {
-                src: ['node_modules/@popperjs/core/dist/umd/popper.min.js', 'node_modules/bootstrap/dist/js/bootstrap.min.js', 'node_modules/lightbox2/dist/js/lightbox.js', 'src/flinthillsparanormal.js'],
+                src: ['node_modules/@popperjs/core/dist/umd/popper.min.js', 'node_modules/bootstrap/dist/js/bootstrap.min.js', 'src/flinthillsparanormal.js'],
                 dest: 'dist/flinthillsparanormal.js'
             }
         },
@@ -18,9 +18,7 @@ module.exports = function(grunt) {
         },
         dist: {
             files: {
-                //'/home/flinthillsparanormal/sites/flinthillsparanormal/static/js/flinthillsparanormal.min.js': ['<%= concat.dist.dest %>'],
                 '../static/js/flinthillsparanormal.min.js': ['<%= concat.dist.dest %>'],
-                '../static/js/fontawesome-free.min.js': ['node_modules/@fortawesome/fontawesome-free/js/all.js'],
             }
         }
     },
