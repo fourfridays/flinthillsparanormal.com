@@ -1,17 +1,14 @@
 from django.db import models
 from django import forms
 
-from wagtail.admin.edit_handlers import (
+from wagtail.admin.panels import (
     FieldPanel,
     FieldRowPanel,
     InlinePanel,
-    MultiFieldPanel,
-    PageChooserPanel,
-    StreamFieldPanel,
+    MultiFieldPanel
 )
-from wagtail.core.fields import RichTextField, StreamField
-from wagtail.core.models import Page
-from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.fields import RichTextField, StreamField
+from wagtail.models import Page
 from wagtail.contrib.forms.models import AbstractFormField, AbstractEmailForm
 from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
@@ -93,18 +90,18 @@ class StandardPage(Page):
         ('three_columns', ThreeColumnBlock(group='COLUMNS')),
         ('four_columns', FourColumnBlock(group='COLUMNS')),
         ('image_grid', ImageGridBlock(icon='image', min_num=2, max_num=4, help_text='Minimum 2 blocks and a maximum of 4 blocks')),
-    ],default='')
+    ], use_json_field=True, default='')
 
     content_panels = Page.content_panels + [
         MultiFieldPanel([
-            ImageChooserPanel('hero_image'),
+            FieldPanel('hero_image'),
             FieldPanel('hero_heading', classname='full'),
             FieldPanel('hero_caption', classname='full'),
             FieldPanel('hero_photo_credit', classname='full'),
             MultiFieldPanel([
                 FieldPanel('hero_cta'),
-                PageChooserPanel('hero_cta_link'),
+                FieldPanel('hero_cta_link'),
                 ])
             ], heading='Hero Image'),
-        StreamFieldPanel('body'),
+        FieldPanel('body'),
     ]
