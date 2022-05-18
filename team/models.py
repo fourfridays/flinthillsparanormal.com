@@ -1,10 +1,10 @@
 from django.db import models
 
-from wagtail.core.models import Page
+from wagtail.models import Page
 
-from wagtail.core.fields import StreamField
-from wagtail.admin.edit_handlers import StreamFieldPanel
-from wagtail.core.blocks import RawHTMLBlock
+from wagtail.fields import StreamField
+from wagtail.admin.panels import FieldPanel
+from wagtail.blocks import RawHTMLBlock
 
 from pages.blocks import TeamBlock
 
@@ -13,8 +13,8 @@ class TeamPage(Page):
     body = StreamField([
         ('team', TeamBlock()),
         ('raw_html', RawHTMLBlock()),
-    ],default='')
+    ], use_json_field=True, default='')
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel('body'),
+        FieldPanel('body'),
     ]

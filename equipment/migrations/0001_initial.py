@@ -2,8 +2,8 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 import wagtail.images.blocks
 
 
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             name='EquipmentPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('body', wagtail.core.fields.StreamField([('equipment', wagtail.core.blocks.StructBlock([('image', wagtail.images.blocks.ImageChooserBlock(help_text='Select or upload equipment image')), ('title', wagtail.core.blocks.CharBlock(help_text='Equipment title')), ('description', wagtail.core.blocks.TextBlock(help_text='Equipment description'))]))], default='')),
+                ('body', wagtail.fields.StreamField([('equipment', wagtail.blocks.StructBlock([('image', wagtail.images.blocks.ImageChooserBlock(help_text='Select or upload equipment image')), ('title', wagtail.blocks.CharBlock(help_text='Equipment title')), ('description', wagtail.blocks.TextBlock(help_text='Equipment description'))]))], default='')),
             ],
             options={
                 'abstract': False,

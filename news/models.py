@@ -9,16 +9,16 @@ from django.template.defaultfilters import slugify
 from django.utils.translation import gettext_lazy as _
 from django import forms
 
-from wagtail.core.models import Page
-from wagtail.core.fields import RichTextField, StreamField
-from wagtail.core import blocks
-from wagtail.admin.edit_handlers import (
-    FieldPanel, InlinePanel, MultiFieldPanel, FieldRowPanel, StreamFieldPanel)
-from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.models import Page
+from wagtail.fields import RichTextField, StreamField
+from wagtail import blocks
+from wagtail.admin.panels import (
+    FieldPanel, InlinePanel, MultiFieldPanel, FieldRowPanel
+    )
 from wagtail.snippets.models import register_snippet
 from wagtail.search import index
 
-from wagtail.core.blocks import TextBlock, StructBlock, StreamBlock, FieldBlock, CharBlock, RichTextBlock, RawHTMLBlock
+from wagtail.blocks import TextBlock, StructBlock, StreamBlock, FieldBlock, CharBlock, RichTextBlock, RawHTMLBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
@@ -217,7 +217,7 @@ class NewsPage(Page):
     )
 
 
-    body = StreamField(NewsStreamBlock())
+    body = StreamField(NewsStreamBlock(), use_json_field=True)
 
     news_categories = models.ManyToManyField(
         NewsCategory, through=NewsCategoryNewsPage, blank=True)
@@ -251,7 +251,7 @@ NewsPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('date'),
     FieldPanel('author'),
-    StreamFieldPanel('body'),
+    FieldPanel('body'),
     MultiFieldPanel([
         FieldPanel('tags'),
         InlinePanel('categories', label=_("Categories")),

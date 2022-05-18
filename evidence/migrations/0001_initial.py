@@ -2,8 +2,8 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 import wagtail.documents.blocks
 import wagtail.embeds.blocks
 import wagtail.images.blocks
@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
             name='EvidencePage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('body', wagtail.core.fields.StreamField([('evidence', wagtail.core.blocks.StructBlock([('title', wagtail.core.blocks.CharBlock(help_text='Evidence title')), ('date', wagtail.core.blocks.DateBlock()), ('sound', wagtail.documents.blocks.DocumentChooserBlock(help_text='Select or upload evidence sound clip', required=False)), ('image', wagtail.images.blocks.ImageChooserBlock(help_text='Select or upload evidence image', required=False)), ('embed', wagtail.embeds.blocks.EmbedBlock(required=False))]))], default='')),
+                ('body', wagtail.fields.StreamField([('evidence', wagtail.blocks.StructBlock([('title', wagtail.blocks.CharBlock(help_text='Evidence title')), ('date', wagtail.blocks.DateBlock()), ('sound', wagtail.documents.blocks.DocumentChooserBlock(help_text='Select or upload evidence sound clip', required=False)), ('image', wagtail.images.blocks.ImageChooserBlock(help_text='Select or upload evidence image', required=False)), ('embed', wagtail.embeds.blocks.EmbedBlock(required=False))]))], default='')),
             ],
             options={
                 'abstract': False,
