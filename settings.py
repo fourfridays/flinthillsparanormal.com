@@ -97,6 +97,8 @@ DIVIO_DOMAIN_REDIRECTS = [
 
 ALLOWED_HOSTS = [DIVIO_DOMAIN] + DIVIO_DOMAIN_ALIASES + DIVIO_DOMAIN_REDIRECTS
 
+CSRF_TRUSTED_ORIGINS = [os.environ.get('CSRF_TRUSTED_ORIGINS', default='https://flinthillsparanormal.com')]
+
 # Redirect to HTTPS by default, unless explicitly disabled
 SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT') != "False"
 
