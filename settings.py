@@ -97,6 +97,8 @@ DIVIO_DOMAIN_REDIRECTS = [
 
 ALLOWED_HOSTS = [DIVIO_DOMAIN] + DIVIO_DOMAIN_ALIASES + DIVIO_DOMAIN_REDIRECTS
 
+CSRF_TRUSTED_ORIGINS = [os.environ.get('CSRF_TRUSTED_ORIGINS', default='https://flinthillsparanormal.com')]
+
 # Redirect to HTTPS by default, unless explicitly disabled
 SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT') != "False"
 
@@ -143,11 +145,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-TIME_ZONE = 'America/Los_Angeles'
 LANGUAGE_CODE = 'en-us'
 USE_I18N = True
 USE_TZ = True
-USE_L10N = True
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -198,3 +198,4 @@ PREPEND_WWW = False
 # Make low-quality but small images
 WAGTAILIMAGES_JPEG_QUALITY = 40
 WAGTAILIMAGES_WEBP_QUALITY = 45
+WAGTAIL_ENABLE_WHATS_NEW_BANNER = False
