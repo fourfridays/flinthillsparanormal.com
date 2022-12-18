@@ -8,10 +8,14 @@ from pages.blocks import EvidenceBlock
 
 
 class EvidencePage(Page):
-    body = StreamField([
-        ('evidence', EvidenceBlock()),
-    ],use_json_field=True, default='')
+    body = StreamField(
+        [
+            ("evidence", EvidenceBlock()),
+        ],
+        use_json_field=True,
+        default="",
+    )
 
     content_panels = Page.content_panels + [
-        FieldPanel('body'),
+        FieldPanel("body"),
     ]

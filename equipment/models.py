@@ -10,10 +10,14 @@ from pages.blocks import EquipmentBlock
 
 
 class EquipmentPage(Page):
-    body = StreamField([
-        ('equipment', EquipmentBlock()),
-    ],use_json_field=True, default='')
+    body = StreamField(
+        [
+            ("equipment", EquipmentBlock()), 
+        ],
+        use_json_field=True,
+        default="",
+    )
 
     content_panels = Page.content_panels + [
-        FieldPanel('body'),
+        FieldPanel("body"),
     ]

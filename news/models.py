@@ -7,21 +7,12 @@ from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404
 from django.template.defaultfilters import slugify
 from django.utils.translation import gettext_lazy as _
-from django import forms
 
 from wagtail.models import Page
-from wagtail.fields import RichTextField, StreamField
-from wagtail import blocks
-from wagtail.admin.panels import (
-    FieldPanel, InlinePanel, MultiFieldPanel, FieldRowPanel
-    )
+from wagtail.fields import StreamField
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.snippets.models import register_snippet
 from wagtail.search import index
-
-from wagtail.blocks import TextBlock, StructBlock, StreamBlock, FieldBlock, CharBlock, RichTextBlock, RawHTMLBlock
-from wagtail.images.blocks import ImageChooserBlock
-from wagtail.documents.blocks import DocumentChooserBlock
-from wagtail.embeds.blocks import EmbedBlock
 
 from taggit.models import TaggedItemBase, Tag
 
@@ -33,37 +24,44 @@ from pages.blocks import NewsStreamBlock
 import datetime
 
 
-#News Index Page
+# News Index Page
 class NewsIndexPage(Page):
     @property
     def news(self):
         # Get list of news pages that are descendants of this page
         news = NewsPage.objects.descendant_of(self).live()
-        news = news.order_by(
-            '-date'
-        ).select_related('owner').prefetch_related(
-            'tagged_items__tag',
-            'categories',
-            'categories__category',
+        news = (
+            news.order_by("-date")
+            .select_related("owner")
+            .prefetch_related(
+                "tagged_items__tag",
+                "categories",
+                "categories__category",
+            )
         )
         return news
 
-    def get_context(self, request, tag=None, category=None, author=None, *args,
-                    **kwargs):
-        context = super(NewsIndexPage, self).get_context(
-            request, *args, **kwargs)
+    def get_context(
+        self, request, tag=None, category=None, author=None, *args, **kwargs
+    ):
+        context = super(
+            NewsIndexPage, self
+            ).get_context(
+                request, *args, **kwargs
+                )
         news = self.news
 
         if tag is None:
-            tag = request.GET.get('tag')
+            tag = request.GET.get("tag")
         if tag:
             news = news.filter(tags__slug=tag)
         if category is None:  # Not coming from category_view in views.py
-            if request.GET.get('category'):
+            if request.GET.get("category"):
                 category = get_object_or_404(
-                    NewsCategory, slug=request.GET.get('category'))
+                    NewsCategory, slug=request.GET.get("category")
+                )
         if category:
-            if not request.GET.get('category'):
+            if not request.GET.get("category"):
                 category = get_object_or_404(NewsCategory, slug=category)
             news = news.filter(categories__category__name=category)
         if author:
@@ -73,9 +71,9 @@ class NewsIndexPage(Page):
                 news = news.filter(author_id=author)
 
         # Pagination
-        page = request.GET.get('page')
+        page = request.GET.get("page")
         page_size = None
-        if hasattr(settings, 'NEWS_PAGINATION_PER_PAGE'):
+        if hasattr(settings, "NEWS_PAGINATION_PER_PAGE"):
             page_size = settings.NEWS_PAGINATION_PER_PAGE
 
         if page_size is not None:
@@ -87,32 +85,41 @@ class NewsIndexPage(Page):
             except EmptyPage:
                 news = paginator.page(paginator.num_pages)
 
-        context['news'] = news
-        context['category'] = category
-        context['tag'] = tag
-        context['author'] = author
+        context["news"] = news
+        context["category"] = category
+        context["tag"] = tag
+        context["author"] = author
         context = get_news_context(context)
 
         return context
 
     class Meta:
-        verbose_name = _('News index')
-    subpage_types = ['news.NewsPage']
+        verbose_name = _("News index")
+
+    subpage_types = ["news.NewsPage"]
 
 
 def get_news_context(context):
-    """ Get context data useful on all blog related pages """
-    context['authors'] = get_user_model().objects.filter(
-        owned_pages__live=True,
-        owned_pages__content_type__model='newspage'
-    ).annotate(Count('owned_pages')).order_by('-owned_pages__count')
-    context['all_categories'] = NewsCategory.objects.all()
-    context['root_categories'] = NewsCategory.objects.filter(
-        parent=None,
-    ).prefetch_related(
-        'children',
-    ).annotate(
-        news_count=Count('newspage'),
+    """Get context data useful on all blog related pages"""
+    context["authors"] = (
+        get_user_model()
+        .objects.filter(
+            owned_pages__live=True, owned_pages__content_type__model="newspage"
+        )
+        .annotate(Count("owned_pages"))
+        .order_by("-owned_pages__count")
+    )
+    context["all_categories"] = NewsCategory.objects.all()
+    context["root_categories"] = (
+        NewsCategory.objects.filter(
+            parent=None,
+        )
+        .prefetch_related(
+            "children",
+        )
+        .annotate(
+            news_count=Count("newspage"),
+        )
     )
     return context
 
@@ -120,27 +127,33 @@ def get_news_context(context):
 @register_snippet
 class NewsCategory(models.Model):
     name = models.CharField(
-        max_length=80, unique=True, verbose_name=_('Category Name'))
+        max_length=80, unique=True,
+        verbose_name=_("Category Name")
+    )
     slug = models.SlugField(unique=True, max_length=80)
     parent = models.ForeignKey(
-        'self', blank=True, null=True, related_name="children",
+        "self",
+        blank=True,
+        null=True,
+        related_name="children",
         help_text=_(
-            'Categories, unlike tags, can have a hierarchy. You might have a '
-            'Jazz category, and under that have children categories for Bebop'
-            ' and Big Band. Totally optional.'),
-        on_delete=models.CASCADE
+            "Categories, unlike tags, can have a hierarchy. You might have a "
+            "Jazz category, and under that have children categories for Bebop"
+            " and Big Band. Totally optional."
+        ),
+        on_delete=models.CASCADE,
     )
     description = models.CharField(max_length=500, blank=True)
 
     class Meta:
-        ordering = ['name']
+        ordering = ["name"]
         verbose_name = _("News Category")
         verbose_name_plural = _("NewsCategories")
 
     panels = [
-        FieldPanel('name'),
-        FieldPanel('parent'),
-        FieldPanel('description'),
+        FieldPanel("name"),
+        FieldPanel("parent"),
+        FieldPanel("description"),
     ]
 
     def __str__(self):
@@ -150,31 +163,37 @@ class NewsCategory(models.Model):
         if self.parent:
             parent = self.parent
             if self.parent == self:
-                raise ValidationError('Parent category cannot be self.')
+                raise ValidationError("Parent category cannot be self.")
             if parent.parent and parent.parent == self:
-                raise ValidationError('Cannot have circular Parents.')
+                raise ValidationError("Cannot have circular Parents.")
 
     def save(self, *args, **kwargs):
         if not self.slug:
             slug = slugify(self.name)
             count = NewsCategory.objects.filter(slug=slug).count()
             if count > 0:
-                slug = '{}-{}'.format(slug, count)
+                slug = "{}-{}".format(slug, count)
             self.slug = slug
         return super(NewsCategory, self).save(*args, **kwargs)
 
 
 class NewsCategoryNewsPage(models.Model):
     category = models.ForeignKey(
-        NewsCategory, related_name="+", verbose_name=_('Category'), on_delete=models.CASCADE)
-    page = ParentalKey('NewsPage', related_name='categories')
+        NewsCategory,
+        related_name="+",
+        verbose_name=_("Category"),
+        on_delete=models.CASCADE,
+    )
+    page = ParentalKey("NewsPage", related_name="categories")
     panels = [
-        FieldPanel('category'),
+        FieldPanel("category"),
     ]
 
 
 class NewsPageTag(TaggedItemBase):
-    content_object = ParentalKey('NewsPage', related_name='tagged_items', on_delete=models.CASCADE)
+    content_object = ParentalKey(
+        "NewsPage", related_name="tagged_items", on_delete=models.CASCADE
+    )
 
 
 @register_snippet
@@ -184,8 +203,10 @@ class NewsTag(Tag):
 
 
 def limit_author_choices():
-    """ Limit choices in blog author field based on config settings """
-    LIMIT_AUTHOR_CHOICES = getattr(settings, 'NEWS_LIMIT_AUTHOR_CHOICES_GROUP', 'Editors')
+    """Limit choices in blog author field based on config settings"""
+    LIMIT_AUTHOR_CHOICES = getattr(
+        settings, "NEWS_LIMIT_AUTHOR_CHOICES_GROUP", "Editors"
+    )
     if LIMIT_AUTHOR_CHOICES:
         if isinstance(LIMIT_AUTHOR_CHOICES, str):
             limit = Q(groups__name=LIMIT_AUTHOR_CHOICES)
@@ -193,39 +214,44 @@ def limit_author_choices():
             limit = Q()
             for s in LIMIT_AUTHOR_CHOICES:
                 limit = limit | Q(groups__name=s)
-        if getattr(settings, 'NEWS_LIMIT_AUTHOR_CHOICES_ADMIN', False):
+        if getattr(settings, "NEWS_LIMIT_AUTHOR_CHOICES_ADMIN", False):
             limit = limit | Q(is_staff=True)
     else:
-        limit = {'is_staff': True}
+        limit = {"is_staff": True}
     return limit
 
 
-#News Page
+# News Page
 class NewsPage(Page):
     date = models.DateField(
-        _("Post date"), default=datetime.datetime.today,
-        help_text=_("This date may be displayed on the news post. It is not used to schedule posts to go live at a later date.")
+        _("Post date"),
+        default=datetime.datetime.today,
+        help_text=_(
+            "This date may be displayed on the news post. \
+                It is not used to schedule posts to go live at a later date."
+        ),
     )
 
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        blank=True, null=True,
+        blank=True,
+        null=True,
         limit_choices_to=limit_author_choices,
-        verbose_name=_('Author'),
+        verbose_name=_("Author"),
         on_delete=models.SET_NULL,
-        related_name='author_pages',
+        related_name="author_pages",
     )
-
 
     body = StreamField(NewsStreamBlock(), use_json_field=True)
 
     news_categories = models.ManyToManyField(
-        NewsCategory, through=NewsCategoryNewsPage, blank=True)
-    
+        NewsCategory, through=NewsCategoryNewsPage, blank=True
+    )
+
     tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
 
     search_fields = Page.search_fields + [
-        index.SearchField('body'),
+        index.SearchField("body"),
     ]
 
     def save_revision(self, *args, **kwargs):
@@ -242,18 +268,21 @@ class NewsPage(Page):
         return context
 
     class Meta:
-        verbose_name = _('News Article')
-        verbose_name_plural = _('News Articles')
+        verbose_name = _("News Article")
+        verbose_name_plural = _("News Articles")
 
-    parent_page_types = ['news.NewsIndexPage']
+    parent_page_types = ["news.NewsIndexPage"]
+
 
 NewsPage.content_panels = [
-    FieldPanel('title', classname="full title"),
-    FieldPanel('date'),
-    FieldPanel('author'),
-    FieldPanel('body'),
-    MultiFieldPanel([
-        FieldPanel('tags'),
-        InlinePanel('categories', label=_("Categories")),
-    ]),
+    FieldPanel("title", classname="full title"),
+    FieldPanel("date"),
+    FieldPanel("author"),
+    FieldPanel("body"),
+    MultiFieldPanel(
+        [
+            FieldPanel("tags"),
+            InlinePanel("categories", label=_("Categories")),
+        ]
+    ),
 ]
