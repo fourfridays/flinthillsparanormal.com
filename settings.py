@@ -184,7 +184,7 @@ SERVER_EMAIL = os.environ.get("SERVER_EMAIL", default="do.not.reply@flinthillspa
 
 RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY", default="")
 RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY", default="")
-NOCAPTCHA = False
+NOCAPTCHA = True
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 PREPEND_WWW = False
