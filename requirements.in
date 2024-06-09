@@ -14,4 +14,5 @@ uWSGI==2.0.26
 wagtail==6.1.2
 whitenoise==6.6.0
 
+django-recaptcha==4.0.0
 wagtail-django-recaptcha==2.1.1

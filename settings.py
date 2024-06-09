@@ -13,6 +13,7 @@ INSTALLED_APPS = [
     "news",
     "pages",
     "team",
+    "django_recaptcha",
     "wagtailcaptcha",
     "wagtail.contrib.styleguide",
     "wagtail.contrib.table_block",
