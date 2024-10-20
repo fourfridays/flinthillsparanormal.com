@@ -12,7 +12,7 @@ sentry-sdk==2.14.0
 # added to avoid older version being installed by dj-database-url
 typing-extensions==4.12.2
 uWSGI==2.0.26
-wagtail==6.2.1
+wagtail==6.2.2
 whitenoise==6.7.0
 
 django-recaptcha==4.0.0
