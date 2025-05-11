@@ -177,7 +177,7 @@ else:
     }
     PUBLIC_MEDIA_LOCATION = "media"
     MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/"
-    storage_backend = "page.storage_backends.PublicMediaStorage"
+    storage_backend = "pages.storage_backends.PublicMediaStorage"
 
 STORAGES = {
     "default": {"BACKEND": storage_backend},
