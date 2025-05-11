@@ -1,0 +1,22 @@
+services:
+  web:
+    build: "."
+    container_name: flinthillsparanormal-web
+    links:
+      - "db:postgres"
+    ports:
+      - "8000:80"
+    volumes:
+      - ".:/app:rw"
+      - "./data:/data:rw"
+    command: python manage.py runserver 0.0.0.0:80
+    env_file: .env-local
+
+  db:
+    image: postgres:latest
+    container_name: flinthillsparanormal-db
+    environment:
+      POSTGRES_DB: "db"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    volumes:
+      - ".:/app:rw"

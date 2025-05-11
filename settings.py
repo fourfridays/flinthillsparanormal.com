@@ -1,10 +1,16 @@
+import logging
 import os
 import dj_database_url
 
+from distutils.util import strtobool
 from pathlib import Path
-from urllib.parse import urlparse, parse_qs
+from wagtail.embeds.oembed_providers import youtube
 
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+# Doing this boolean check against str values. Can't set boolean values in configmap
+DEBUG = os.environ.get("DJANGO_DEBUG") == "True"
 
 INSTALLED_APPS = [
     "anymail",
@@ -57,6 +63,12 @@ sentry_dsn = os.environ.get("SENTRY_DSN", "")
 if sentry_dsn:
     import sentry_sdk
     from sentry_sdk.integrations.django import DjangoIntegration
+    from sentry_sdk.integrations.logging import LoggingIntegration
+    
+    # The SDK will honor the level set by the logging library, which is WARNING by default.
+    # If we want to capture records with lower severity, we need to configure
+    # the logger level first.
+    logging.basicConfig(level=logging.WARNING)
 
     def ignore_disallowedhost(event, hint):
         if event.get("logger", None) == "django.security.DisallowedHost":
@@ -66,35 +78,18 @@ if sentry_dsn:
     sentry_sdk.init(
         dsn=sentry_dsn,
         before_send=ignore_disallowedhost,
-        integrations=[DjangoIntegration()],
-        release=os.environ.get("GIT_COMMIT", "develop"),
-        environment=os.environ.get("STAGE", "local"),
+        integrations=[
+            LoggingIntegration(
+                level=logging.WARNING,
+                event_level=logging.WARNING
+            ),
+            DjangoIntegration(),
+        ],
         traces_sample_rate=0.2,
+        send_default_pii=True,
     )
 
 ROOT_URLCONF = "urls"
-
-SECRET_KEY = os.environ.get("SECRET_KEY", "<a string of random characters>")
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_DEBUG", "False") == "True"
-
-DIVIO_DOMAIN = os.environ.get("DOMAIN", "")
-DIVIO_DOMAIN_ALIASES = [
-    d.strip() for d in os.environ.get("DOMAIN_ALIASES", "").split(",") if d.strip()
-]
-DIVIO_DOMAIN_REDIRECTS = [
-    d.strip() for d in os.environ.get("DOMAIN_REDIRECTS", "").split(",") if d.strip()
-]
-
-ALLOWED_HOSTS = [DIVIO_DOMAIN] + DIVIO_DOMAIN_ALIASES + DIVIO_DOMAIN_REDIRECTS
-
-CSRF_TRUSTED_ORIGINS = [
-    os.environ.get("CSRF_TRUSTED_ORIGINS", default="https://flinthillsparanormal.com")
-]
-
-# Redirect to HTTPS by default, unless explicitly disabled
-SECURE_SSL_REDIRECT = os.environ.get("SECURE_SSL_REDIRECT") != "False"
 
 TEMPLATES = [
     {
@@ -112,30 +107,10 @@ TEMPLATES = [
     },
 ]
 
-# Authentication Backends
-AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
-
-# Search Backends
-WAGTAILSEARCH_BACKENDS = {
-    "default": {
-        "BACKEND": "wagtail.search.backends.database",
-    }
-}
-
 WSGI_APPLICATION = "wsgi.application"
 
 DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite://:memory:")
-
-DATABASES = {
-    "default": dj_database_url.config(
-        default=DATABASE_URL,
-        conn_max_age=0,
-        conn_health_checks=False,
-    )
-}
-
-# Password validation
-# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
+DATABASES = {"default": dj_database_url.parse(DATABASE_URL)}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -143,6 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "OPTIONS": {
+            "min_length": 8,
+        },
     },
     {
         "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
@@ -152,10 +130,22 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Authentication Backends
+AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
+
+# SESSION DB
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_AGE = 1209600  # Two weeks, in seconds
+
+SITE_ID = 1
+
 LANGUAGE_CODE = "en-us"
-USE_I18N = True
-USE_TZ = True
 TIME_ZONE = "UTC"
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = ["static"]
@@ -167,92 +157,107 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
+staticfiles_backend = "django.contrib.staticfiles.storage.StaticFilesStorage"
 STATIC_URL = "/static/"
 
-# read the setting value from the environment variable
-DEFAULT_STORAGE_DSN = os.environ.get(
-    "DEFAULT_STORAGE_DSN",
-    "file:///data/media/?url=%2Fmedia%2F"
-)
-
-def parse_s3_url(s3_url):
-    parsed_url = urlparse(s3_url)
-
-    # Extract credentials (if present)
-    if '@' in parsed_url.netloc:
-        auth, netloc = parsed_url.netloc.split('@')
-        access_key, secret_key = auth.split(':')
-    else:
-        access_key = secret_key = None
-        netloc = parsed_url.netloc
-
-    # Extract bucket and domain
-    domain_parts = netloc.split('.s3.amazonaws.com')
-    bucket_name = domain_parts[0] if len(domain_parts) > 1 else None
-    domain = "s3.amazonaws.com" if len(domain_parts) > 1 else netloc
-
-    # Extract query parameters
-    query_params = parse_qs(parsed_url.query)
-
-    return {
-        "access_key": access_key,
-        "secret_key": secret_key,
-        "bucket_name": bucket_name,
-        "domain": domain,
-        "query_params": query_params
-    }
-
-s3_url = DEFAULT_STORAGE_DSN
-parsed_result = parse_s3_url(s3_url)
-
-if parsed_result["access_key"] and parsed_result["secret_key"]:
-    STORAGE_BACKEND = "storages.backends.s3boto3.S3Boto3Storage"
-    AWS_S3_ACCESS_KEY_ID = parsed_result.get("access_key")
-    AWS_S3_SECRET_ACCESS_KEY = parsed_result.get("secret_key")
-    AWS_STORAGE_BUCKET_NAME = parsed_result.get("bucket_name")
-    AWS_CUSTOM_DOMAIN = AWS_STORAGE_BUCKET_NAME
-    AWS_DEFAULT_ACL = "public-read"
-    AWS_S3_FILE_OVERWRITE = True
-    AWS_QUERYSTRING_AUTH = False
-    AWS_IS_GZIPPED = True
-else:
-    STORAGE_BACKEND = "django.core.files.storage.FileSystemStorage"
-    # only required for local file storage and serving, in development
+if DEBUG is True:
+    storage_backend = "django.core.files.storage.FileSystemStorage"
     MEDIA_URL = "media/"
-    MEDIA_ROOT = os.path.join("/data/media/")
+    MEDIA_ROOT = os.path.join("/data/media")
+else:
+    AWS_S3_ACCESS_KEY_ID = os.environ.get("AWS_S3_ACCESS_KEY_ID", default=None)
+    AWS_S3_SECRET_ACCESS_KEY = os.environ.get("AWS_S3_SECRET_ACCESS_KEY", default=None)
+    AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", default=None)
+    AWS_DEFAULT_ACL = None
+    AWS_S3_CUSTOM_DOMAIN = os.environ.get("AWS_S3_CUSTOM_DOMAIN", default=None)
+    AWS_IS_GZIPPED = os.environ.get("AWS_IS_GZIPPED", default=True)
+    AWS_S3_OBJECT_PARAMETERS = {
+        "Expires": "Thu, 31 Dec 2099 20:00:00 GMT",
+        "CacheControl": "max-age=94608000",
+    }
+    PUBLIC_MEDIA_LOCATION = "media"
+    MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/"
+    storage_backend = "page.storage_backends.PublicMediaStorage"
 
 STORAGES = {
-    "default": {
-        "BACKEND": STORAGE_BACKEND,
-    },
-    # ManifestStaticFilesStorage is recommended in production, to prevent
-    # outdated JavaScript / CSS assets being served from cache
-    # See https://docs.djangoproject.com/en/5.1/ref/contrib/staticfiles/#manifeststaticfilesstorage
-    "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
-    },
+    "default": {"BACKEND": storage_backend},
+    "staticfiles": {"BACKEND": staticfiles_backend},
 }
 
-WAGTAIL_SITE_NAME = "Flint Hills Paranormal"
-WAGTAILADMIN_BASE_URL = "https://flinthillsparanormal.com/"
+WAGTAIL_SITE_NAME = os.environ.get(
+    "WAGTAIL_SITE_NAME", default="Flint Hills Paranormal"
+)
+
+# Base URL to use when referring to full URLs within the Wagtail admin backend -
+# e.g. in notification emails. Don't include '/admin' or a trailing slash
+WAGTAILADMIN_BASE_URL = os.environ.get("WAGTAILADMIN_BASE_URL", default="localhost")
+
+DOMAIN_ALIASES = [
+    d.strip() for d in os.environ.get("DOMAIN_ALIASES", "").split(",") if d.strip()
+]
+
+ALLOWED_HOSTS = DOMAIN_ALIASES
+
+CSRF_TRUSTED_ORIGINS = [
+    os.environ.get("CSRF_TRUSTED_ORIGINS", default="http://localhost")
+]
+
+SECRET_KEY = os.environ.get("SECRET_KEY", default="<a string of random characters>")
+
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
+# Make low-quality but small images
+WAGTAILIMAGES_AVIF_QUALITY = 60
+WAGTAILIMAGES_JPEG_QUALITY = 60
+WAGTAILIMAGES_WEBP_QUALITY = 65
+WAGTAIL_ENABLE_WHATS_NEW_BANNER = False
+WAGTAILEMBEDS_FINDERS = [
+    # Fetches YouTube videos but puts ``?scheme=https`` in the GET parameters
+    # when calling YouTube's oEmbed endpoint
+    {
+        "class": "wagtail.embeds.finders.oembed",
+        "providers": [youtube],
+        "options": {"scheme": "https"},
+    },
+    # Handles all other oEmbed providers the default way
+    {
+        "class": "wagtail.embeds.finders.oembed",
+    },
+]
+
+WAGTAILEMBEDS_RESPONSIVE_HTML = True
+
+# wagtailcodeblock
+WAGTAIL_CODE_BLOCK_LINE_NUMBERS = False
+WAGTAIL_CODE_BLOCK_THEME = "tomorrow"
+
+WAGTAILIMAGES_FORMAT_CONVERSIONS = {
+    "avif": "avif",
+    "bmp": "jpeg",
+    "webp": "webp",
+}
 
 # DJANGO ANYMAIL
 ANYMAIL = {
-    "MAILGUN_API_KEY": os.environ.get("MAILGUN_API_KEY", default=""),
-    "MAILGUN_SENDER_DOMAIN": os.environ.get("MAILGUN_SENDER_DOMAIN", default=""),
+    "MAILGUN_API_KEY": os.getenv("MAILGUN_API_KEY", default=""),
+    "MAILGUN_SENDER_DOMAIN": os.getenv("MAILGUN_SENDER_DOMAIN", default=""),
 }
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", default="do.not.reply@flinthillsparanormal.com")
-SERVER_EMAIL = os.environ.get("SERVER_EMAIL", default="do.not.reply@flinthillsparanormal.com")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", default="")
+SERVER_EMAIL = os.getenv("SERVER_EMAIL", default="")
 
-DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
-PREPEND_WWW = False
-SITE_ID = 1
+# DJANGO DEBUG TOOLBAR
+def show_toolbar(request=None):
+    return bool(strtobool(os.environ.get("DJANGO_DEBUG", "True")))
 
-# Make low-quality but small images
-WAGTAILIMAGES_JPEG_QUALITY = 70
-WAGTAILIMAGES_WEBP_QUALITY = 75
-WAGTAIL_ENABLE_WHATS_NEW_BANNER = False
+if show_toolbar():
+    INSTALLED_APPS += ["debug_toolbar"]
+    MIDDLEWARE = ["debug_toolbar.middleware.DebugToolbarMiddleware"] + MIDDLEWARE
+
+    DEBUG_TOOLBAR_CONFIG = {
+        "SHOW_TOOLBAR_CALLBACK": show_toolbar,
+        "SHOW_COLLAPSED": True,
+    }
 
 # Logging configuration
 LOGGING = {

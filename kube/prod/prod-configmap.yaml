@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+data:
+  DJANGO_DEBUG: "False"
+  DOMAIN_ALIASES: "flinthillsparanormal.com"
+  DJANGO_LOGLEVEL: "info"
+  WAGTAILADMIN_BASE_URL: "https://flinthillsparanormal.com"
+  WAGTAIL_SITE_NAME: "Flint Hills Paranormal"
+  CSRF_TRUSTED_ORIGINS: "https://flinthillsparanormal.com"

@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flinthillsparanormal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flinthillsparanormal
+  template:
+    metadata:
+      labels:
+        app: flinthillsparanormal
+    spec:
+      initContainers:
+        - name: migrate
+          image: ghcr.io/fourfridays/flinthillsparanormal.com:latest
+          imagePullPolicy: Always
+          command: ["python", "manage.py", "migrate"]
+          envFrom:
+          - secretRef:
+              name: secret
+      containers:
+        - image: ghcr.io/fourfridays/flinthillsparanormal.com:latest
+          name: flinthillsparanormal
+          resources:
+            requests:
+              ephemeral-storage: "2Gi"
+              memory: "256Mi"
+            limits:
+              ephemeral-storage: "4Gi"
+              memory: "512Mi"
+          envFrom:
+          - secretRef:
+              name: secret
+          - configMapRef:
+              name: config
+          ports:
+            - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flinthillsparanormal
+  labels:
+    app: flinthillsparanormal
+spec:
+  selector:
+    app: flinthillsparanormal
+  ports:
+    - port: 8088
+      targetPort: 8000
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flinthillsparanormal
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+    - host: flinthillsparanormal.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: flinthillsparanormal
+                port:
+                  number: 8088
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: flinthillsparanormal-tls
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`flinthillsparanormal.com`)
+      middlewares:
+        - name: flinthillsparanormal-gzip-compress
+      services:
+        - name: flinthillsparanormal
+          port: 8088
+  tls: # This route uses TLS
+    certResolver: le # Uses our certificate resolver to get a certificate automatically!
+---
+# Enable gzip compression
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: flinthillsparanormal-gzip-compress
+spec:
+  compress: {}
