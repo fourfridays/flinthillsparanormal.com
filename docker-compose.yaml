@@ -2,6 +2,8 @@ services:
   web:
     build: "."
     container_name: flinthillsparanormal-web
+    depends_on:
+      - db
     links:
       - "db:postgres"
     ports:
@@ -13,10 +15,18 @@ services:
     env_file: .env-local
 
   db:
-    image: postgres:latest
+    image: postgres:17
     container_name: flinthillsparanormal-db
     environment:
+      POSTGRES_USER: "flinthillsparanormal"
       POSTGRES_DB: "db"
       POSTGRES_HOST_AUTH_METHOD: "trust"
+    ports:
+      - '5432:5432'
     volumes:
-      - ".:/app:rw"
+      - db:/var/lib/postgresql/data
+      - ./data/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+volumes:
+  db:
+    driver: local
