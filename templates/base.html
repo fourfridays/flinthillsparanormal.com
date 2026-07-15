@@ -1,75 +1,15 @@
 {% load navigation_tags static wagtailuserbar wagtailcore_tags %}
 {% wagtail_site as current_site %}
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>{% block title %}{% if self.seo_title == 'Home' %}{{ current_site.site_name }}{% elif self.seo_title %}{{ self.seo_title }} | {{ current_site.site_name }}{% else %}{{ self.title }} | {{ current_site.site_name }}{% endif %}{% endblock %}</title>
-
-        {% if self.search_description %}
-            <meta name="description" content="{{ self.search_description }}" />
-        {% endif %}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        {% if self.seo_title == 'Home' %}<link rel="canonical" href="{{ page.full_url }}" />{% endif %}
-
-        {# Global stylesheets #}
-        <!-- FONTAWESOME FREE -->
-        <link rel="preload" href="{% static 'fontawesomefree/css/all.min.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="{% static 'fontawesomefree/css/all.min.css' %}"></noscript>
-
-        <!-- GOOGLE FONTS -->
-        <link rel="preload" href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:600|Lato&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:600|Lato&display=swap"></noscript>
-
-        <!-- CUSTOM STYLING -->
-        <link rel="preload" href="{% static 'css/flinthillsparanormal.min.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="{% static 'css/flinthillsparanormal.min.css' %}"></noscript>
-
-        <!-- Google Tag Manager -->
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-KF3Q6W9');</script>
-        <!-- End Google Tag Manager -->
-
-        {% block head-extra %}{% endblock head-extra %}
-    </head>
-
-    <body class="{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}">
-        <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KF3Q6W9"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
-        
-        {% wagtailuserbar %}
-
-        <header>
-            {% block header %}
-                {# Header contains the main_navigation block #}
-                {% include "includes/header.html" with parent=site_root calling_page=self %}
-            {% endblock header %}
-        </header>
-
-        <main role="main">
-            {% block content %}
-            {% endblock content %}
-        </main>
-
-        <!-- Footer -->
-        <footer role="contentinfo">
-            {% include "includes/footer.html" %}
-        </footer>
-
-        {# Global javascript #}
-        <script async type="text/javascript" src="{% static 'js/flinthillsparanormal.min.js' %}"></script>
-
-        {% block extra_js %}{% endblock %}
-    </body>
-</html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8" />
+<title>{% block title %}{% if self.seo_title == 'Home' %}{{ current_site.site_name }}{% elif self.seo_title %}{{ self.seo_title }} | {{ current_site.site_name }}{% else %}{{ self.title }} | {{ current_site.site_name }}{% endif %}{% endblock %}</title>
+{% if self.search_description %}<meta name="description" content="{{ self.search_description }}" />{% endif %}<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preload" href="{% static 'fontawesomefree/css/all.min.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="{% static 'fontawesomefree/css/all.min.css' %}"></noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Chivo+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/flinthillsparanormal.min.css' %}"><link rel="stylesheet" href="{% static 'css/flinthills-redesign.css' %}">
+{% block head-extra %}{% endblock head-extra %}
+</head>
+<body class="{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}"><a class="skip-link" href="#main-content">Skip to content</a><header>{% block header %}{% include "includes/header.html" with parent=site_root calling_page=self %}{% endblock header %}</header><main id="main-content" role="main">{% block content %}{% endblock content %}</main><footer role="contentinfo">{% include "includes/footer.html" %}</footer><script async src="{% static 'js/flinthillsparanormal.min.js' %}"></script>{% block extra_js %}{% endblock %}</body></html>
