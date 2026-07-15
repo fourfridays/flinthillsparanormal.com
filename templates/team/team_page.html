@@ -1,14 +1,28 @@
 {% extends 'base.html' %}
 {% load wagtailcore_tags %}
-{% block body_class %}{{ self.title }}{% endblock %}
-
+{% block body_class %}{{ self.slug }}{% endblock %}
 {% block content %}
-    <div class="container">
-        <h1 class="my-3">{{ page.title }}</h1>
-        <div class="team-block">
-            {% for block in page.body %}
-                {% include_block block %}
-            {% endfor %}
+<section class="team-intro" aria-labelledby="team-heading">
+    <div class="team-intro__signal"><span class="signal-pulse"></span> Active field unit / Emporia, Kansas</div>
+    <div class="team-intro__grid">
+        <div>
+            <p class="eyebrow">About / The people behind the evidence</p>
+            <h1 id="team-heading">The team<br><em>stays human.</em></h1>
+        </div>
+        <div class="team-intro__copy">
+            <p>Every investigation begins with a person who wants to be heard. Meet the investigators who bring patience, experience, and a clear head to the unexplained.</p>
+            <div class="team-intro__rule"><span>FHP / Roster</span><span>Respect first</span></div>
         </div>
     </div>
+</section>
+<section class="team-roster" aria-label="Flint Hills Paranormal team members">
+    <div class="team-roster__header"><span>Field unit profiles</span><span>Confidential / Professional / Local</span></div>
+    <div class="team-blocks">
+        {% for block in page.body %}
+            {% include_block block %}
+        {% empty %}
+            <p class="empty-state">The field unit roster is being updated. Check back soon.</p>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}
