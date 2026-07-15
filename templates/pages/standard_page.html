@@ -1,38 +1,17 @@
 {% extends 'base.html' %}
 {% load wagtailcore_tags wagtailimages_tags %}
 {% block body_class %}{{ self.slug }}{% endblock %}
-
 {% block content %}
     {% if page.hero_image %}
         {% image page.hero_image fill-1920x813-c100 as heroimage %}
-        {% image page.hero_image fill-1920x813-c100 format-webp as webp_heroimage %}
-        <div class="hero-image">
+        <section class="hero-image" aria-labelledby="hero-heading">
             <figure>
-                <picture>
-                    <source data-sizes="auto" srcset="{{ webp_heroimage.url }}" type="image/webp">
-                    <img class="img-fluid" src="{{ heroimage.url }}" alt="{{ page.hero_image.title }}"/>
-                </picture>
-                {% if page.hero_heading or page.hero_caption or page.hero_photo_credit %}
-                    <figcaption class="p-3">
-                        {% if page.hero_heading %}
-                            <h2 class="text-uppercase mb-0">{{ page.hero_heading }}</h2>
-                        {% endif %}
-                        {% if page.hero_caption %}
-                            <p class="d-none d-sm-block"><small>{{ page.hero_caption }}</small></p>
-                        {% endif %}
-                    </figcaption>
-                    {% if page.hero_photo_credit %}
-                        <div class="photo-credit d-none d-sm-block p-1">
-                            <small><b>Photo:</b> {{ page.hero_photo_credit }}</small>
-                        </div>
-                    {% endif %}
-                {% endif %}
+                <img src="{{ heroimage.url }}" alt="{{ page.hero_image.title }}" />
+                <div class="hero-scanlines" aria-hidden="true"></div>
+                {% if page.hero_heading or page.hero_caption %}<figcaption><p class="eyebrow">Field note / {{ page.title }}</p>{% if page.hero_heading %}<h1 id="hero-heading">{{ page.hero_heading }}</h1>{% endif %}{% if page.hero_caption %}<p class="hero-caption">{{ page.hero_caption }}</p>{% endif %}{% if page.hero_cta and page.hero_cta_link %}<a class="hero-link" href="{{ page.hero_cta_link.url }}">{{ page.hero_cta }} <span aria-hidden="true">↗</span></a>{% endif %}</figcaption>{% endif %}
+                {% if page.hero_photo_credit %}<div class="photo-credit">Photo / {{ page.hero_photo_credit }}</div>{% endif %}
             </figure>
-        </div>
-    {% endif %}
-
-    <!-- BODY -->
-    {% for block in page.body %}
-        {{ block }}
-    {% endfor %}
+        </section>
+    {% else %}<section class="page-intro"><p class="eyebrow">Field note / {{ page.title }}</p><h1>{{ page.title }}</h1></section>{% endif %}
+    <div class="content-flow">{% for block in page.body %}{{ block }}{% endfor %}</div>
 {% endblock %}

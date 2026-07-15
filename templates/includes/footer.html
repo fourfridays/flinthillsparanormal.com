@@ -1,20 +1,6 @@
 {% load static %}
-<div class="container py-2 my-3">
-    <div class="row footer-text">
-        <div class="col-12 col-md-5 mb-3 heart-rate">
-            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="150px" height="73px" viewBox="0 0 150 73" enable-background="new 0 0 150 73" xml:space="preserve">
-                <polyline fill="none" stroke="#009B9E" stroke-width="3" stroke-miterlimit="10" points="0,45.486 38.514,45.486 44.595,33.324 50.676,45.486 57.771,45.486 62.838,55.622 71.959,9 80.067,63.729 84.122,45.486 97.297,45.486 103.379,40.419 110.473,45.486 150,45.486"/>
-            </svg>
-            <div class="fade-in"></div>
-            <div class="fade-out"></div>
-        </div>
-        <div class="col-md-1 mb-3 text-center">
-            <p><a target="_blank" href="https://www.facebook.com/flinthillsparanormal"><i class="fa-brands fa-3x fa-facebook" aria-hidden="true"></i><span class="sr-only">Facebook</span></a></p>
-        </div>
-        <div class="col-md-6 text-right contact-info">
-            <p><i class="fa fa-mobile-screen position-static"></i> <a href="tel:+13163935246">+(1) 316 393-5246</a> <i class="fa-solid fa-envelope position-static"></i> <a href="mailto:flinthillsparanormal@gmail.com"> flinthillsparanormal@gmail.com</a></p>
-            <p><span class="copyright">&copy;</span> Copyright {% now "Y" %} Flint Hills Paranormal</p>
-            <p>A <a style="color: #a43f33;" target="_blank" href="https://fourfridays.com"><img class="img-fluid" src="{% static 'images/fourfridays-wordmark-white-transparent.png' %}" alt="fourfridays beta" width="128px" /></a> website.</p>
-        </div>
-    </div>
+<div class="footer-shell">
+    <div class="footer-brand"><img src="{% static 'images/flinthillsparanormal-logo.png' %}" alt="Flint Hills Paranormal" /><p>Respectful investigation of the unexplained across the Flint Hills.</p></div>
+    <div class="footer-contact"><p class="footer-label">Open channel</p><p><a href="tel:+13163935246">+(1) 316 393-5246</a><br><a href="mailto:flinthillsparanormal@gmail.com">flinthillsparanormal@gmail.com</a></p><a class="footer-social" target="_blank" rel="noreferrer" href="https://www.facebook.com/flinthillsparanormal">Facebook <span aria-hidden="true">↗</span></a></div>
+    <div class="footer-meta"><p><span class="signal-line"></span> Case files remain human.</p><p>© {% now "Y" %} Flint Hills Paranormal</p><p>A <a href="https://fourfridays.com" target="_blank" rel="noreferrer">fourfridays</a> website.</p></div>
 </div>

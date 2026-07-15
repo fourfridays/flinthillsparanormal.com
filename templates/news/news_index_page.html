@@ -1,36 +1,6 @@
 {% extends "base.html" %}
-
 {% load wagtailcore_tags %}
-
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <h1 class="my-4">News Articles</h1>
-            </div>
-        </div>
-        {% for article in news %}
-            {% if forloop.first %}<div class='row'>{% endif %} 
-                <div class="col-md-4">
-                    <article class="my-3 news-index">
-                        <h2 class="my-2">
-                            <a href="{{ article.slug }}">{{ article.title }}</a>
-                        </h2>
-                        <p class="small">
-                            Posted by {{ article.author.first_name }} {{ article.author.last_name }} on {{ article.date }}        
-                            {% if article.categories.all %}
-                                in 
-                                {% for cat in article.categories.all %}
-                                    <span style="text-transform: lowercase;">{{ cat.category.name }}</span> {% if not forloop.last %}, {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                        </p>
-                        <p class="text-center"><a class="btn btn-primary btn-sm" href="{{ article.slug }}">Read Article</a></p>
-                    </article>
-                </div>
-            {% if forloop.counter|divisibleby:3 %}</div><div class='row'>{% endif %}
-            {% if forloop.last %}</div>{% endif %}
-            {% empty %} No News Stories yet!
-        {% endfor %}
-    </div>
+<section class="page-intro page-intro--split"><div><p class="eyebrow">Archive / Published findings</p><h1>Case files</h1></div><p class="intro-copy">Reports from investigations across the Flint Hills. Read the account first; decide what you believe after.</p></section>
+<div class="case-list">{% for article in news %}<article class="case-item"><div class="case-index">{{ forloop.counter|stringformat:"02d" }}</div><div class="case-body"><p class="case-meta">{{ article.date }}{% if article.author %} / {{ article.author.first_name }} {{ article.author.last_name }}{% endif %}</p><h2><a href="{{ article.slug }}">{{ article.title }}</a></h2></div><a class="case-arrow" href="{{ article.slug }}" aria-label="Read {{ article.title }}">↗</a></article>{% empty %}<p class="empty-state">No case files have been published yet. Check back after the next investigation.</p>{% endfor %}</div>
 {% endblock %}
