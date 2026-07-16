@@ -1,12 +1,14 @@
 {% load wagtailcore_tags wagtailimages_tags %}
-
-<div class="row mb-4">
-    <div class="col-md-4">
-        {% image value.image width-273 height-440 as theimage %}
-        <img class="img-fluid thumbnail" src="{{ theimage.url }}" width="{{ theimage.width }}" height="{{ theimage.height }}" alt="{{ theimage.alt }}" />
+<article class="team-member">
+    <div class="team-member__portrait">
+        {% image value.image fill-520x680-c100 as theimage %}
+        <img src="{{ theimage.url }}" width="{{ theimage.width }}" height="{{ theimage.height }}" alt="{{ theimage.alt }}" loading="lazy" />
+        <span class="team-member__stamp">FHP / FIELD UNIT</span>
     </div>
-    <div class="col-md-8">
-        <h5>{% include_block value.title %}</h5>
-        <p>{% include_block value.bio %}</p>
+    <div class="team-member__body">
+        <p class="team-member__index">Profile / <span class="team-member__counter" aria-hidden="true"></span></p>
+        <h2>{% include_block value.title %}</h2>
+        <div class="team-member__bio">{% include_block value.bio %}</div>
+        <div class="team-member__footer"><span>On call for the unexplained</span><span class="team-member__arrow" aria-hidden="true">↗</span></div>
     </div>
-</div>
+</article>

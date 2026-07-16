@@ -1,10 +1,28 @@
 {% extends 'base.html' %}
 {% load wagtailcore_tags %}
-{% block body_class %}{{ self.title }}{% endblock %}
-
+{% block body_class %}{{ self.slug }}{% endblock %}
 {% block content %}
-    <div class="container">
-        <h1 class="my-3">{{ self.title }}</h1>
-        {{ self.body }}
+<section class="evidence-intro" aria-labelledby="evidence-heading">
+    <div class="evidence-intro__signal"><span class="signal-pulse"></span> Archive / Unprocessed evidence</div>
+    <div class="evidence-intro__grid">
+        <div>
+            <p class="eyebrow">The record / Raw observations</p>
+            <h1 id="evidence-heading">Evidence<br><em>room.</em></h1>
+        </div>
+        <div class="evidence-intro__copy">
+            <p>Images, sounds, and video collected during investigations across the Flint Hills. Nothing here is presented as proof—only as a record of what was captured.</p>
+            <div class="evidence-intro__rule"><span>FHP / Archive</span><span>Review with care</span></div>
+        </div>
     </div>
+</section>
+<section class="evidence-archive" aria-label="Investigation evidence archive">
+    <div class="evidence-archive__header"><span>Evidence index</span><span>Sound / Image / Video</span></div>
+    <div class="evidence-list">
+        {% for block in page.body %}
+            {% include_block block %}
+        {% empty %}
+            <p class="empty-state">No evidence has been published yet. The archive is quiet.</p>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}

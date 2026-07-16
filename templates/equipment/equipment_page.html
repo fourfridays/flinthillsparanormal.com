@@ -1,16 +1,28 @@
 {% extends 'base.html' %}
 {% load wagtailcore_tags %}
-{% block body_class %}{{ self.title }}{% endblock %}
-
+{% block body_class %}{{ self.slug }}{% endblock %}
 {% block content %}
-    <div class="container">
-        <h1 class="my-3">{{ page.title }}</h1>
-        <div class="equipment-block">
-            <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 justify-content-center">
-                {% for block in page.body %}
-                    {% include_block block %}
-                {% endfor %}
-            </div>
+<section class="equipment-intro" aria-labelledby="equipment-heading">
+    <div class="equipment-intro__signal"><span class="signal-pulse"></span> Field kit / In rotation</div>
+    <div class="equipment-intro__grid">
+        <div>
+            <p class="eyebrow">About / The tools behind the record</p>
+            <h1 id="equipment-heading">Tools for<br><em>the unknown.</em></h1>
+        </div>
+        <div class="equipment-intro__copy">
+            <p>Good equipment does not make the claim. It helps us ask a better question, document what happened, and leave room for an honest answer.</p>
+            <div class="equipment-intro__rule"><span>FHP / Kit index</span><span>Method over myth</span></div>
         </div>
     </div>
+</section>
+<section class="equipment-roster" aria-label="Investigation equipment">
+    <div class="equipment-roster__header"><span>Current field kit</span><span>Capture / Measure / Observe</span></div>
+    <div class="equipment-grid">
+        {% for block in page.body %}
+            {% include_block block %}
+        {% empty %}
+            <p class="empty-state">The field kit index is being updated. Check back soon.</p>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}

@@ -1,4 +1,12 @@
 <!-- YouTube 16:9 aspect ratio -->
 <div class="embed-responsive embed-responsive-16by9">
-    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ value.you_tube_embed }}"></iframe>
+    <iframe
+        class="embed-responsive-item"
+        src="https://www.youtube-nocookie.com/embed/{{ value.you_tube_embed }}?enablejsapi=1&amp;origin={{ request.scheme }}://{{ request.get_host }}"
+        title="Flint Hills Paranormal evidence video"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+    </iframe>
 </div>

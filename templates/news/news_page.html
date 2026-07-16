@@ -1,16 +1,8 @@
 {% extends "base.html" %}
 {% block title %}{{ self.title }} - News & Events | {{ request.site.site_name }}{% endblock %}
-
 {% load wagtailcore_tags %}
-
 {% block content %}
-    <div class="container">
-        <div class="row mt-2">
-            <div class="col-md-11">
-               {% include "news/news_post.html" with news=self %}
-            </div>
-            <div class="col-md-1">
-            </div>
-       </div>
-   </div>
+<div class="article-shell">
+    {% include "news/news_post.html" with news=self %}
+</div>
 {% endblock %}
