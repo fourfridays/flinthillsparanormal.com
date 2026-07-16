@@ -1,30 +1,14 @@
 {% load wagtailcore_tags static %}
-
-<div class="article">
-    <h1 class="mt-4">{{ news.title }}</h1>
-    
-    <p class="small text-muted">
-        Posted by {{ news.author.first_name }} {{ news.author.last_name }} on {{ news.date }}        
-        {% if news.categories.all %}
-            in 
-            {% for cat in news.categories.all %}
-                <span style="text-transform: lowercase;">{{ cat.category.name }}</span> {% if not forloop.last %}, {% endif %}
-            {% endfor %}
-        {% endif %}
-    </p>
-
-    <hr style="margin-top: 0;">
-
-    {% include "includes/streamfield.html" with content=news.body %}
-
+<article class="article">
+    <header class="article__header">
+        <p class="article__kicker">Field report / Cryptozoology</p>
+        <h1>{{ news.title }}</h1>
+        <div class="article__meta"><span>{% if news.author %}Filed by {{ news.author.first_name }} {{ news.author.last_name }}{% endif %}</span><span>{{ news.date }}</span></div>
+    </header>
+    <div class="article__body">
+        {% include "includes/streamfield.html" with content=news.body %}
+    </div>
     {% if news.tags.all %}
-        <hr style="margin-top: 0; margin-bottom: 10px; clear: both;">
-
-        <div class="my-2 small .text-muted">    
-            <i class="fa fa-tags" aria-hidden="true"></i>
-            {% for tag in news.tags.all %}
-                {{ tag }}{% if not forloop.last %}, {% endif %}
-            {% endfor %}        
-        </div>
+        <footer class="article__footer"><span class="article__footer-label">Filed under</span>{% for tag in news.tags.all %}<a href="?tag={{ tag.slug }}">{{ tag }}</a>{% if not forloop.last %}<span aria-hidden="true"> / </span>{% endif %}{% endfor %}</footer>
     {% endif %}
-</div>
+</article>
