@@ -1,12 +1,14 @@
 {% load wagtailcore_tags wagtailimages_tags %}
-
-
-{% image value.image width-316 as theimage %}
-
-<div class="col mx-2 my-3" style="width: 20rem; background-color: #333; border-color: #333;">
-    <img class="img-fluid card-img-top" src="{{ theimage.url }}" alt="{{ theimage.alt }}">
-    <div class="card-block">
-        <h4 class="card-title px-3 pt-2">{% include_block value.title %}</h4>
-        <p class="card-text px-3 py-2">{% include_block value.description %}</p>
+<article class="equipment-item">
+    <div class="equipment-item__image">
+        {% image value.image fill-720x520-c100 as theimage %}
+        <img src="{{ theimage.url }}" width="{{ theimage.width }}" height="{{ theimage.height }}" alt="{{ theimage.alt }}" loading="lazy" />
+        <span class="equipment-item__stamp">FHP / KIT</span>
+        <span class="equipment-item__arrow" aria-hidden="true">↗</span>
     </div>
-</div>
+    <div class="equipment-item__body">
+        <p class="equipment-item__index">Item / <span aria-hidden="true"></span></p>
+        <h2>{% include_block value.title %}</h2>
+        <div class="equipment-item__description">{% include_block value.description %}</div>
+    </div>
+</article>
