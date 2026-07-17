@@ -102,7 +102,35 @@ audio {
     font-size: clamp(3rem, 13vw, 5.25rem);
     line-height: 0.88;
     letter-spacing: -0.04em;
-    overflow-wrap: anywhere;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+
+  .hero-image h1,
+  .page-intro h1,
+  .equipment-intro h1,
+  .team-intro h1,
+  .evidence-intro h1,
+  .article__header h1,
+  .content-flow h1,
+  .content-flow h2,
+  .content-flow h3,
+  .bg-white h1,
+  .bg-white h2,
+  .bg-white h3,
+  .bg-light h1,
+  .bg-light h2,
+  .bg-light h3,
+  .bg-body h1,
+  .bg-body h2,
+  .bg-body h3 {
+    max-width: 100%;
+    min-width: 0;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    text-wrap: balance;
   }
 
   .page-intro {
@@ -131,7 +159,9 @@ audio {
     font-size: clamp(3rem, 13vw, 4.75rem);
     line-height: 0.9;
     letter-spacing: -0.04em;
-    overflow-wrap: anywhere;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
   }
 
   .equipment-item:hover .equipment-item__image img,
@@ -143,7 +173,9 @@ audio {
   .article__header h1 {
     font-size: clamp(2.5rem, 11vw, 4rem);
     letter-spacing: -0.04em;
-    overflow-wrap: anywhere;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
   }
 
   .article__body {
@@ -153,11 +185,57 @@ audio {
 
   .article__body p,
   .article__body li {
-    overflow-wrap: anywhere;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+}
+
+@media (max-width: 767px) {
+  article > .container > .row > .col-sm-3 {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
   }
 }
 
 @media (max-width: 600px) {
+  .hero-image h1 {
+    width: 100%;
+    max-width: none;
+    font-size: clamp(2rem, 9vw, 3.2rem);
+    line-height: 0.92;
+  }
+
+  .page-intro h1,
+  .equipment-intro h1,
+  .team-intro h1,
+  .evidence-intro h1 {
+    font-size: clamp(2.25rem, 10vw, 3.6rem);
+    line-height: 0.94;
+  }
+
+  .bg-white h1,
+  .bg-light h1,
+  .bg-body h1,
+  .content-flow h1 {
+    font-size: clamp(2rem, 9vw, 3rem);
+  }
+
+  .bg-white h2,
+  .bg-light h2,
+  .bg-body h2,
+  .content-flow h2 {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+  }
+
+  .bg-white h3,
+  .bg-light h3,
+  .bg-body h3,
+  .content-flow h3 {
+    font-size: clamp(1.4rem, 7vw, 2rem);
+  }
+
   .hero-image figcaption > p:not(.eyebrow) {
     font-size: 1rem;
     line-height: 1.5;
