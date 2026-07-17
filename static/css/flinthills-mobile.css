@@ -1,0 +1,378 @@
+/* Mobile adaptations for the Red Signal redesign.
+ * Loaded after flinthills-redesign.css so the desktop system remains intact.
+ */
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+img,
+video,
+iframe,
+audio {
+  max-width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .site-nav {
+    min-height: 4.75rem;
+    padding: 0.75rem max(1rem, env(safe-area-inset-left));
+    gap: 1rem;
+  }
+
+  .brand-lockup {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  .brand-lockup img {
+    display: block;
+    width: clamp(7.5rem, 30vw, 9rem);
+    height: auto;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 4.25rem;
+    min-height: 2.75rem;
+    margin-left: auto;
+    flex: none;
+  }
+
+  .nav-drawer.collapse:not(.show) {
+    display: none;
+  }
+
+  .nav-drawer.collapse.show {
+    display: block;
+  }
+
+  .nav-drawer {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    padding: 0.75rem max(1rem, env(safe-area-inset-right)) 1rem max(1rem, env(safe-area-inset-left));
+    max-height: calc(100svh - 4.75rem);
+    overflow-y: auto;
+    background: #101010;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-list a,
+  .nav-cta {
+    display: flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+
+  .nav-list li {
+    padding: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-cta {
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 0.75rem;
+  }
+
+  .hero-image figure,
+  .hero-image img {
+    height: min(78svh, 42rem);
+    min-height: 31rem;
+  }
+
+  .hero-image figcaption {
+    top: auto;
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: clamp(1.5rem, 6vh, 3rem);
+    left: max(1rem, env(safe-area-inset-left));
+    transform: none;
+  }
+
+  .hero-image h1,
+  .page-intro h1 {
+    font-size: clamp(3rem, 13vw, 5.25rem);
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+
+  .hero-image h1,
+  .page-intro h1,
+  .equipment-intro h1,
+  .team-intro h1,
+  .evidence-intro h1,
+  .article__header h1,
+  .content-flow h1,
+  .content-flow h2,
+  .content-flow h3,
+  .bg-white h1,
+  .bg-white h2,
+  .bg-white h3,
+  .bg-light h1,
+  .bg-light h2,
+  .bg-light h3,
+  .bg-body h1,
+  .bg-body h2,
+  .bg-body h3 {
+    max-width: 100%;
+    min-width: 0;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    text-wrap: balance;
+  }
+
+  .page-intro {
+    padding-top: clamp(3rem, 9vw, 4.5rem);
+    padding-bottom: 2.5rem;
+  }
+
+  .archive-heading {
+    gap: 1.25rem;
+  }
+
+  .case-item {
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+  }
+
+  .case-read {
+    grid-column: 2;
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .equipment-intro h1,
+  .team-intro h1,
+  .evidence-intro h1 {
+    font-size: clamp(3rem, 13vw, 4.75rem);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+
+  .equipment-item:hover .equipment-item__image img,
+  .team-member:hover .team-member__portrait img,
+  .evidence-image:hover img {
+    transform: none;
+  }
+
+  .article__header h1 {
+    font-size: clamp(2.5rem, 11vw, 4rem);
+    letter-spacing: -0.04em;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+
+  .article__body {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .article__body p,
+  .article__body li {
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  article > .container > .row > .col-sm-4 {
+    min-width: 0;
+  }
+
+  article > .container > .row > .col-sm-4 h1,
+  article > .container > .row > .col-sm-4 h2,
+  article > .container > .row > .col-sm-4 h3,
+  article > .container > .row > .col-sm-4 h4 {
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
+    padding-inline: clamp(0.65rem, 1.5vw, 1rem);
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+}
+
+@media (max-width: 767px) {
+  article > .container > .row > .col-sm-3,
+  article > .container > .row > .col-sm-4,
+  article > .container > .row > .col-sm-6 {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-image h1 {
+    width: 100%;
+    max-width: none;
+    font-size: clamp(2rem, 9vw, 3.2rem);
+    line-height: 0.92;
+  }
+
+  .page-intro h1,
+  .equipment-intro h1,
+  .team-intro h1,
+  .evidence-intro h1 {
+    font-size: clamp(2.25rem, 10vw, 3.6rem);
+    line-height: 0.94;
+  }
+
+  .bg-white h1,
+  .bg-light h1,
+  .bg-body h1,
+  .content-flow h1 {
+    font-size: clamp(2rem, 9vw, 3rem);
+  }
+
+  .bg-white h2,
+  .bg-light h2,
+  .bg-body h2,
+  .content-flow h2 {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+  }
+
+  .bg-white h3,
+  .bg-light h3,
+  .bg-body h3,
+  .content-flow h3 {
+    font-size: clamp(1.4rem, 7vw, 2rem);
+  }
+
+  .hero-image figcaption > p:not(.eyebrow) {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .equipment-intro,
+  .team-intro,
+  .evidence-intro {
+    padding-top: 2.5rem;
+  }
+
+  .equipment-intro__grid,
+  .team-intro__grid,
+  .evidence-intro__grid {
+    margin-top: 2rem;
+  }
+
+  .equipment-roster,
+  .team-roster,
+  .evidence-archive,
+  .article-shell {
+    padding-right: max(1rem, env(safe-area-inset-right));
+    padding-left: max(1rem, env(safe-area-inset-left));
+  }
+
+  .team-member {
+    padding: 2.75rem 0;
+  }
+
+  .team-member__portrait {
+    width: min(100%, 18rem);
+  }
+
+  .team-member h2 {
+    max-width: 13ch;
+    font-size: clamp(2rem, 10vw, 3.5rem);
+    line-height: 0.94;
+    letter-spacing: -0.04em;
+  }
+
+  .equipment-item h2,
+  .evidence-entry h2 {
+    font-size: clamp(1.75rem, 8vw, 2.75rem);
+    letter-spacing: -0.04em;
+  }
+
+  .evidence-channel {
+    padding: 1rem 0 1.5rem;
+  }
+
+  .article-shell {
+    padding-top: 2.5rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .article__body {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .footer-shell {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.25rem;
+    padding: 2.75rem max(1rem, env(safe-area-inset-right)) 2rem max(1rem, env(safe-area-inset-left));
+  }
+
+  .footer-links,
+  .footer-legal {
+    grid-column: auto;
+    text-align: left;
+    align-self: auto;
+  }
+
+  .footer-signal {
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+  }
+
+  .footer-signal__line {
+    display: none;
+  }
+
+  .heart-rate {
+    width: 8rem;
+  }
+
+  .footer-signal svg {
+    width: 8rem;
+  }
+
+  .footer-bottom {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+    padding: 1rem max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+  }
+}
+
+@media (pointer: coarse) {
+  a,
+  button,
+  summary,
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .equipment-item__image img,
+  .team-member__portrait img,
+  .evidence-image img {
+    transition: none;
+  }
+}
