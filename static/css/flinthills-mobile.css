@@ -191,8 +191,32 @@ audio {
   }
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+  article > .container > .row > .col-sm-4 {
+    min-width: 0;
+  }
+
+  article > .container > .row > .col-sm-4 h1,
+  article > .container > .row > .col-sm-4 h2,
+  article > .container > .row > .col-sm-4 h3,
+  article > .container > .row > .col-sm-4 h4 {
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
+    padding-inline: clamp(0.65rem, 1.5vw, 1rem);
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+}
+
 @media (max-width: 767px) {
-  article > .container > .row > .col-sm-3 {
+  article > .container > .row > .col-sm-3,
+  article > .container > .row > .col-sm-4,
+  article > .container > .row > .col-sm-6 {
     flex: 0 0 100%;
     width: 100%;
     max-width: 100%;
