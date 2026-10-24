@@ -6,6 +6,7 @@ ENV PYTHONUNBUFFERED=1
 # Install system packages required by Wagtail and Django.
 RUN apt-get update --yes --quiet && apt-get install --yes --quiet \
     --no-install-recommends \
+    ca-certificates \
     build-essential \
     libmagic1 \
     libpq-dev \
