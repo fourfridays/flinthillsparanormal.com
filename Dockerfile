@@ -21,7 +21,9 @@ WORKDIR /app
 
 # Copy the repository files to it
 COPY requirements.* /app/
-RUN pip install -U pip pip-tools wheel python-magic && pip install -r requirements.txt
+RUN python -m pip install --upgrade pip \
+    && python -m pip install --upgrade pip-tools wheel python-magic \
+    && python -m pip install -r requirements.txt
 
 COPY . /app
 RUN python manage.py collectstatic --noinput --clear
