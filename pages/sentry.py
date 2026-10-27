@@ -1,5 +1,12 @@
 """Targeted filters for expected Sentry events."""
 
+import logging
+
+_GUNICORN_NO_BODY_WARNING = (
+    "WSGI app sent body bytes on a no-body response "
+    "(method=%s status=%s); dropping per RFC 9110."
+)
+
 
 def filter_sentry_event(event, hint):
     if event.get("logger") == "django.security.DisallowedHost":
@@ -9,12 +16,18 @@ def filter_sentry_event(event, hint):
     if (
         record is not None
         and record.name == "gunicorn.http.wsgi"
-        and record.getMessage()
-        == "WSGI app sent body bytes on a no-body response "
-        "(method=HEAD status=200); dropping per RFC 9110."
+        and record.levelno == logging.WARNING
+        and record.msg == _GUNICORN_NO_BODY_WARNING
+        and isinstance(record.args, tuple)
+        and len(record.args) == 2
     ):
-        # Django leaves HEAD body stripping to the server. Gunicorn does so
-        # correctly, but warns about this expected behavior.
-        return None
+        # Gunicorn supplies (method, status) as logging arguments, not extra
+        # fields or an event code. Match the template to identify this warning
+        # without parsing rendered text. Unknown signatures are kept.
+        method, status = record.args
+        if method == "HEAD" and isinstance(status, int) and 200 <= status < 500:
+            # Django leaves HEAD body stripping to the server. Suppress that
+            # expected warning, but retain it for server-error responses.
+            return None
 
     return event
